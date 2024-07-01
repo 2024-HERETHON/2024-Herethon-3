@@ -26,22 +26,22 @@ def index(request):
     ).order_by('-num', '-create_date')[:5]
     
     context = {'post_list' : post_list, 'so':so, 'hot_posts':hot_posts}
-    return render(request, 'board/index.html', context)
+    return render(request, 'index.html', context)
 
 # 전체 게시글 검색 기능
 def post_search(request):
     if request.method == 'POST':
         searched = request.POST.get('searched', '')
         post_list = Post.objects.filter(Q(subject__contains=searched) | Q(content__contains=searched))
-        return render(request, 'board/index.html', {'post_list': post_list, 'searched': searched})
+        return render(request, 'index.html', {'post_list': post_list, 'searched': searched})
     else:
-        return render(request, 'board/post_search.html')
+        return render(request, 'post_search.html')
     
 # 지역 설정
 def area_set(request):
     if request.method == 'GET':
         form = AreaForm()
-        return render(request, 'board/area_set.html', {'form': AreaForm})
+        return render(request, 'area_set.html', {'form': AreaForm})
     else:
         form = AreaForm(request.POST)
         if form.is_valid():
@@ -75,7 +75,7 @@ def board_area(request, area):
     ).order_by('-num', '-create_date')[:5]
 
     context = {'area':area, 'area3':area3, 'post_list':post_list, 'hot_posts' : hot_posts, 'so':so,}
-    return render(request, 'board/post_area.html', context)
+    return render(request, 'post_area.html', context)
 
 # 지역 게시글 검색
 def area_search(request, area):
@@ -87,7 +87,7 @@ def area_search(request, area):
     # 지역 게시글 중 검색어 필터링
     post_list = post_list.filter(Q(subject__contains=searched) | Q(content__contains=searched))
     context = {'area':area, 'area3':area3, 'post_list':post_list}
-    return render(request, 'board/post_area.html', context)
+    return render(request, 'post_area.html', context)
 
 
 # 지역별 게시글 생성
@@ -104,13 +104,13 @@ def post_create(request, area):
     else:
         form = PostForm()
     context = {'form':form}
-    return render(request, 'board/post_form.html', context)
+    return render(request, 'post_form.html', context)
 
 # 게시글 상세보기
 def post_detail(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
     context = {'post':post}
-    return render(request, 'board/post_detail.html', context)
+    return render(request, 'post_detail.html', context)
 
 # 답변 생성
 def answer_create(request, post_id):
