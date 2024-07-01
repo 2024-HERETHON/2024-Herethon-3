@@ -4,8 +4,8 @@
 <h1>{{post.subject}}</h1>
 <div>
     <!-- {{ post.author.username }} -->
-    {{ post.create_date|date:"Y-m-d" }}
-    <label>조회</label>
+    {{ post.create_date|date:"m월 d일" }}
+    <label> · 조회</label>
     {{ post.hits }}
 </div>
 <hr>
@@ -13,10 +13,10 @@
     {{ post.content}}
 </div>
 <div>
-    <label>좋아요</label>
-    {{ post.likes }}
+    <br><br>
+    <label>♥️</label>
+    {{ post.likes }}<br><br>
 </div>
-<h5>답변 입력</h5>
     <form action="{% url 'board:answer_create' post.id %}"
         method="post" id="AnswerForm">
         {% csrf_token %}
@@ -34,12 +34,17 @@
             <h5>작성자</h5>
             <!-- <div>{{ answer.author }}</div> -->
             <div>
-                {{ answer.create_date }}
-                <label>좋아요 {{ answer.likes }}개</label>
+                {{ answer.create_date|date:"m/d h:m" }} 
+                <label> 좋아요 {{ answer.likes }}개</label>
+                <div>
+                    <span class="toggle-comment" data-answer-id="{{ answer.id }}">💬</span>
+                    <span>👍</span>
+                </div>
                 <h3>{{ answer.content }}</h3>
             </div>
+            
             <!--댓글 Start-->
-            <form action="{% url 'board:comment_create' answer.id %}" method="post" id="CommentForm">
+            <form action="{% url 'board:comment_create' answer.id %}" method="post" class="comment" id="CommentForm-{{ answer.id }}" style="display: none;">
                 {% csrf_token %}
                 <div>
                     <textarea name="content" id="content" cols="50" placeholder="댓글을 입력하세요."></textarea>
@@ -63,3 +68,20 @@
         {% endfor %}
     </div>
 {% endif %}
+
+<script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function() {
+        // Handle the click event for elements with the class 'toggle-comment'
+        document.querySelectorAll(".toggle-comment").forEach(function(element) {
+            element.addEventListener('click', function() {
+                var answerId = this.getAttribute('data-answer-id');
+                var commentForm = document.getElementById('CommentForm-' + answerId);
+                if (commentForm.style.display === "none") {
+                    commentForm.style.display = "block";
+                } else {
+                    commentForm.style.display = "none";
+                }
+            });
+        });
+    });
+</script>
