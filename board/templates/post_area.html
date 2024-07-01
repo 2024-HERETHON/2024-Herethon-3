@@ -22,7 +22,7 @@
         <br><br><br>
 
         <br>
-        <a href="{% url 'board:post_create' area %}" class="btn btn-primary">글 작성</a>
+        <!-- <a href="{% url 'board:post_create' area %}" class="btn btn-primary">글 작성</a> -->
 
         <div>
             <select class="so">
@@ -69,7 +69,11 @@
                 {% endfor %}
             </tbody>
         </table>
-    </div></body>
+    </div>
+    {% with area=area|default:None %}
+        {% include "navbar.html" %}
+    {% endwith %}
+    </body>
 </html>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
