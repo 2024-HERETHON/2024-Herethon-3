@@ -1,0 +1,65 @@
+<!--상세 페이지 들어왔을 때 조회수 증가-->
+{{ post.update_hits }}
+
+<h1>{{post.subject}}</h1>
+<div>
+    <!-- {{ post.author.username }} -->
+    {{ post.create_date|date:"Y-m-d" }}
+    <label>조회</label>
+    {{ post.hits }}
+</div>
+<hr>
+<div>
+    {{ post.content}}
+</div>
+<div>
+    <label>좋아요</label>
+    {{ post.likes }}
+</div>
+<h5>답변 입력</h5>
+    <form action="{% url 'board:answer_create' post.id %}"
+        method="post" id="AnswerForm">
+        {% csrf_token %}
+        <div>
+            <textarea name="content" id="content" cols="30" rows="15" placeholder="답변을 입력하세요."></textarea>
+        </div>
+        <button type="submit">완료</button>
+    </form>
+<hr>
+
+
+{% if post.answer_set.count > 0 %}
+    <div>
+        {% for answer in post.answer_set.all %}
+            <h5>작성자</h5>
+            <!-- <div>{{ answer.author }}</div> -->
+            <div>
+                {{ answer.create_date }}
+                <label>좋아요 {{ answer.likes }}개</label>
+                <h3>{{ answer.content }}</h3>
+            </div>
+            <!--댓글 Start-->
+            <form action="{% url 'board:comment_create' answer.id %}" method="post" id="CommentForm">
+                {% csrf_token %}
+                <div>
+                    <textarea name="content" id="content" cols="50" placeholder="댓글을 입력하세요."></textarea>
+                </div>
+                <button type="submit">완료</button>
+            </form>
+            {% if answer.comment_set.count > 0 %}
+                <div>
+                    {% for comment in answer.comment_set.all %}
+                        <h5>↪️댓글 작성자</h5>
+                        <!-- <div>{{ comment.author }}</div> -->
+                        <div>
+                            {{ comment.create_date }}
+                            <h3>{{ comment.content }}</h3>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <hr>
+            <!--댓글 End-->
+        {% endfor %}
+    </div>
+{% endif %}
