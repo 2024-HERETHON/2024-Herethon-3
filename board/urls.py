@@ -4,7 +4,7 @@ from . import views
 app_name = 'board'
 
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('', views.board, name='board'),
     path('post/search/', views.post_search, name='post_search'),
     path('area/set/', views.area_set, name='area_set'),
     path('area/<str:area>', views.board_area, name='board_area'),

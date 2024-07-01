@@ -24,7 +24,7 @@
                 <option value="answer" {% if so == 'answer' %} selected {% endif %}>댓글순</option>
             </select>
         </div>
-        <form id="sortForm" method="get" action="{% url 'board:index' %}">
+        <form id="sortForm" method="get" action="{% url 'board:board' %}">
             <input type="hidden" id="so" name="so" value="{{ so }}">
         </form>
 
