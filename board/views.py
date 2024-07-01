@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q, Count, F, Value
 from django.db.models.functions import Coalesce
 
-def index(request):
+def board(request):
 
     # 정렬 기준
     so = request.GET.get('so', 'recent')
@@ -26,7 +26,7 @@ def index(request):
     ).order_by('-num', '-create_date')[:5]
     
     context = {'post_list' : post_list, 'so':so, 'hot_posts':hot_posts}
-    return render(request, 'index.html', context)
+    return render(request, 'board.html', context)
 
 # 전체 게시글 검색 기능
 def post_search(request):
