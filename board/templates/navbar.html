@@ -1,0 +1,10 @@
+<br><br>
+<nav>
+    <a>스터디</a>
+    {% if area %}
+        <a href="{% url 'board:post_create' area %}">➕</a>
+    {% else %}
+        <a>➕</a>
+    {% endif %}
+    <a>마이</a>
+</nav>
