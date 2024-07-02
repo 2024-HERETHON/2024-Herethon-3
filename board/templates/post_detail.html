@@ -2,6 +2,7 @@
 {{ post.update_hits }}
 
 <h1>{{post.subject}}</h1>
+<h5>{{ post.author.nickname }}</h5>
 <div>
     <!-- {{ post.author.username }} -->
     {{ post.create_date|date:"m월 d일" }}
@@ -14,8 +15,17 @@
 </div>
 <div>
     <br><br>
-    <label>♥️</label>
-    {{ post.likes }}<br><br>
+    <a href="#" data-uri="{% url 'board:vote_post' post.id %}" class="recommend">♥️</a>
+    {{ post.voter.count }}
+    <br><br>
+    {% if messages %}
+    <div>
+        {% for message in messages %}
+            <strong>{{ message.tags }}</strong>
+            <ul><li>{{ message.message }}</li></ul>
+        {% endfor %}
+    </div>
+    {% endif %}
 </div>
     <form action="{% url 'board:answer_create' post.id %}"
         method="post" id="AnswerForm">
@@ -31,14 +41,16 @@
 {% if post.answer_set.count > 0 %}
     <div>
         {% for answer in post.answer_set.all %}
-            <h5>작성자</h5>
-            <!-- <div>{{ answer.author }}</div> -->
+            <label>{{ answer.author.nickname }}</label>
+            {% if post.author == answer.author %}
+                <label>(글쓴이)</label>
+            {% endif %}
             <div>
                 {{ answer.create_date|date:"m/d h:m" }} 
-                <label> 좋아요 {{ answer.likes }}개</label>
+                <label> 좋아요 {{ answer.voter.count }}개</label>
                 <div>
                     <span class="toggle-comment" data-answer-id="{{ answer.id }}">💬</span>
-                    <span>👍</span>
+                    <a href="#" data-uri="{% url 'board:vote_answer' answer.id %}" class="recommend">👍</a>
                 </div>
                 <h3>{{ answer.content }}</h3>
             </div>
@@ -54,10 +66,13 @@
             {% if answer.comment_set.count > 0 %}
                 <div>
                     {% for comment in answer.comment_set.all %}
-                        <h5>↪️댓글 작성자</h5>
+                        <label>↪️ {{ comment.author.nickname }}</label>
+                        {% if post.author == comment.author %}
+                            <label>(글쓴이)</label>
+                        {% endif %}
                         <!-- <div>{{ comment.author }}</div> -->
                         <div>
-                            {{ comment.create_date }}
+                            {{ comment.create_date|date:"m/d h:m" }}
                             <h3>{{ comment.content }}</h3>
                         </div>
                     {% endfor %}
@@ -81,6 +96,13 @@
                 } else {
                     commentForm.style.display = "none";
                 }
+            });
+        });
+
+        document.querySelectorAll(".recommend").forEach(function(element) {
+            element.addEventListener('click', function() {
+                var uri = this.getAttribute('data-uri');
+                window.location.href = uri;
             });
         });
     });

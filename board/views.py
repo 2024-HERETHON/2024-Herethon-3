@@ -5,6 +5,7 @@ from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q, Count, F, Value
 from django.db.models.functions import Coalesce
+from django.contrib import messages
 
 def board(request):
 
@@ -33,7 +34,7 @@ def post_search(request):
     if request.method == 'POST':
         searched = request.POST.get('searched', '')
         post_list = Post.objects.filter(Q(subject__contains=searched) | Q(content__contains=searched))
-        return render(request, 'index.html', {'post_list': post_list, 'searched': searched})
+        return render(request, 'board.html', {'post_list': post_list, 'searched': searched})
     else:
         return render(request, 'post_search.html')
     
@@ -96,7 +97,7 @@ def post_create(request, area):
         form = PostForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
-            # post.author = request.user
+            post.author = request.user
             post.create_date = timezone.now()
             post.area = area
             post.save()
@@ -120,7 +121,7 @@ def answer_create(request, post_id):
         if form.is_valid():
             answer = form.save(commit=False)
             answer.post = post
-            # answer.author = request.user.username
+            answer.author = request.user
             answer.create_date = timezone.now()
             answer.save()
         return redirect('board:post_detail', post_id=post.id)
@@ -138,7 +139,7 @@ def comment_create(request, answer_id):
             comment = form.save(commit=False)
             comment.answer = answer
             comment.post = answer.post
-            # comment.author = request.user
+            comment.author = request.user
             comment.create_date = timezone.now()
             comment.save()
         return redirect('board:post_detail', post_id=answer.post.id)
@@ -146,3 +147,25 @@ def comment_create(request, answer_id):
         form = CommentForm()
     context = {'answer':answer, 'CommentForm':form}
     return render(request, 'post_detail.html', context)
+
+# 게시글 좋아요
+def vote_post(request, post_id):
+    post = get_object_or_404(Post, pk=post_id)
+    if request.user == post.author:
+        messages.error(request, "본인이 작성한 글은 추천할 수 없습니다")
+    else: # 작성자 본인이 아님
+        if post.voter.filter(pk=request.user.id).exists(): # 좋아요 취소
+            post.voter.remove(request.user)
+        else:
+            post.voter.add(request.user) # 좋아요 추가
+    return redirect('board:post_detail', post_id=post.id)
+
+# 답변 좋아요
+def vote_answer(request, answer_id):
+    answer = get_object_or_404(Answer, pk=answer_id)
+    if request.user != answer.author: # 작성자 본인 아님
+        if answer.voter.filter(pk=request.user.id).exists(): # 좋아요 취소
+            answer.voter.remove(request.user)
+        else:
+            answer.voter.add(request.user)
+    return redirect('board:post_detail', post_id=answer.post.id)
