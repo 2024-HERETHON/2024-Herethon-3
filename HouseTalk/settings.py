@@ -114,6 +114,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # 사용자 모델 설정
 AUTH_USER_MODEL = 'accounts.CustomUsers'
 
+
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 

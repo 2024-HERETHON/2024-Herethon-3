@@ -16,7 +16,8 @@
         {% for post in hot_posts %}
         <div>
             <h5>Q&A</h5>
-            {{ post.subject }}<br>👁️{{ post.hits }} 🗒️{{ post.answer_set.count }}
+            <a href="{% url 'board:post_detail' post.id%}">{{ post.subject }}</a>
+            <br>👁️{{ post.hits }} 🗒️{{ post.answer_set.count }}
         </div>
         {% endfor %}
         <br><br><br>
