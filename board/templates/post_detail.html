@@ -1,0 +1,109 @@
+<!--상세 페이지 들어왔을 때 조회수 증가-->
+{{ post.update_hits }}
+
+<h1>{{post.subject}}</h1>
+<h5>{{ post.author.nickname }}</h5>
+<div>
+    <!-- {{ post.author.username }} -->
+    {{ post.create_date|date:"m월 d일" }}
+    <label> · 조회</label>
+    {{ post.hits }}
+</div>
+<hr>
+<div>
+    {{ post.content}}
+</div>
+<div>
+    <br><br>
+    <a href="#" data-uri="{% url 'board:vote_post' post.id %}" class="recommend">♥️</a>
+    {{ post.voter.count }}
+    <br><br>
+    {% if messages %}
+    <div>
+        {% for message in messages %}
+            <strong>{{ message.tags }}</strong>
+            <ul><li>{{ message.message }}</li></ul>
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
+    <form action="{% url 'board:answer_create' post.id %}"
+        method="post" id="AnswerForm">
+        {% csrf_token %}
+        <div>
+            <textarea name="content" id="content" cols="30" rows="15" placeholder="답변을 입력하세요."></textarea>
+        </div>
+        <button type="submit">완료</button>
+    </form>
+<hr>
+
+
+{% if post.answer_set.count > 0 %}
+    <div>
+        {% for answer in post.answer_set.all %}
+            <label>{{ answer.author.nickname }}</label>
+            {% if post.author == answer.author %}
+                <label>(글쓴이)</label>
+            {% endif %}
+            <div>
+                {{ answer.create_date|date:"m/d h:m" }} 
+                <label> 좋아요 {{ answer.voter.count }}개</label>
+                <div>
+                    <span class="toggle-comment" data-answer-id="{{ answer.id }}">💬</span>
+                    <a href="#" data-uri="{% url 'board:vote_answer' answer.id %}" class="recommend">👍</a>
+                </div>
+                <h3>{{ answer.content }}</h3>
+            </div>
+            
+            <!--댓글 Start-->
+            <form action="{% url 'board:comment_create' answer.id %}" method="post" class="comment" id="CommentForm-{{ answer.id }}" style="display: none;">
+                {% csrf_token %}
+                <div>
+                    <textarea name="content" id="content" cols="50" placeholder="댓글을 입력하세요."></textarea>
+                </div>
+                <button type="submit">완료</button>
+            </form>
+            {% if answer.comment_set.count > 0 %}
+                <div>
+                    {% for comment in answer.comment_set.all %}
+                        <label>↪️ {{ comment.author.nickname }}</label>
+                        {% if post.author == comment.author %}
+                            <label>(글쓴이)</label>
+                        {% endif %}
+                        <!-- <div>{{ comment.author }}</div> -->
+                        <div>
+                            {{ comment.create_date|date:"m/d h:m" }}
+                            <h3>{{ comment.content }}</h3>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <hr>
+            <!--댓글 End-->
+        {% endfor %}
+    </div>
+{% endif %}
+
+<script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function() {
+        // Handle the click event for elements with the class 'toggle-comment'
+        document.querySelectorAll(".toggle-comment").forEach(function(element) {
+            element.addEventListener('click', function() {
+                var answerId = this.getAttribute('data-answer-id');
+                var commentForm = document.getElementById('CommentForm-' + answerId);
+                if (commentForm.style.display === "none") {
+                    commentForm.style.display = "block";
+                } else {
+                    commentForm.style.display = "none";
+                }
+            });
+        });
+
+        document.querySelectorAll(".recommend").forEach(function(element) {
+            element.addEventListener('click', function() {
+                var uri = this.getAttribute('data-uri');
+                window.location.href = uri;
+            });
+        });
+    });
+</script>
