@@ -92,6 +92,7 @@ def area_search(request, area):
 
 
 # 지역별 게시글 생성
+@login_required(login_url='accounts:login')
 def post_create(request, area):
     if request.method == 'POST':
         form = PostForm(request.POST)
@@ -114,6 +115,7 @@ def post_detail(request, post_id):
     return render(request, 'post_detail.html', context)
 
 # 답변 생성
+@login_required(login_url='accounts:login')
 def answer_create(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
     if request.method == 'POST':
@@ -131,6 +133,7 @@ def answer_create(request, post_id):
     return render(request, 'post_detail.html', context)
 
 # 답변에 대한 댓글 생성
+@login_required(login_url='accounts:login')
 def comment_create(request, answer_id):
     answer = get_object_or_404(Answer, pk=answer_id)
     if request.method == 'POST':
@@ -149,6 +152,7 @@ def comment_create(request, answer_id):
     return render(request, 'post_detail.html', context)
 
 # 게시글 좋아요
+@login_required(login_url='accounts:login')
 def vote_post(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
     if request.user == post.author:
@@ -161,6 +165,7 @@ def vote_post(request, post_id):
     return redirect('board:post_detail', post_id=post.id)
 
 # 답변 좋아요
+@login_required(login_url='accounts:login')
 def vote_answer(request, answer_id):
     answer = get_object_or_404(Answer, pk=answer_id)
     if request.user != answer.author: # 작성자 본인 아님
