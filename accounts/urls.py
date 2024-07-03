@@ -10,4 +10,5 @@ urlpatterns = [
     path('login/', views.login, name='login'), #추가
     path('logout/', views.logout, name='logout'),
     path('logoutTemp/', views.logoutTemp, name='logoutTemp'),  # 'logoutTemp' URL 패턴 추가
+    path('check_email/', views.check_email, name='check_email'),  # 이메일 인증 URL 패턴 추가
 ]
