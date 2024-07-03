@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from board.models import Post
-from study.models import Quiz, SubmitAnswer
+from study.models import SubmitAnswer, SavedFlashCard
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 
@@ -25,3 +25,9 @@ def my_like(request):
 def my_quiz(request):
     answer_list = SubmitAnswer.objects.filter(user=request.user)
     return render(request, 'my_quiz.html', {'answer_list':answer_list})
+
+# 플래시 기록
+@login_required(login_url='accounts:login')
+def my_flash(request):
+    card_list = SavedFlashCard.objects.filter(user=request.user)
+    return render(request, 'my_flash.html', {'card_list':card_list})
