@@ -37,20 +37,16 @@ def post_search(request):
         return render(request, 'board.html', {'post_list': post_list, 'searched': searched})
     else:
         return render(request, 'post_search.html')
-    
-# 지역 설정
+
 def area_set(request):
     if request.method == 'GET':
-        form = AreaForm()
-        return render(request, 'area_set.html', {'form': AreaForm})
+        return render(request, 'area_set.html')
     else:
-        form = AreaForm(request.POST)
-        if form.is_valid():
-            area1 = form.cleaned_data['area1']
-            area2 = form.cleaned_data['area2']
-            area3 = form.cleaned_data['area3']
-            area = f"{area1} {area2} {area3}"
-        return redirect('board:board_area', area = area)
+        si = request.POST.get('si')
+        gu = request.POST.get('gu')
+        dong = request.POST.get('dong')
+        area = f"{si} {gu} {dong}"
+    return redirect('board:board_area', area=area)
 
 # 지역 게시판 보여주기
 def board_area(request, area):
