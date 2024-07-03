@@ -1,0 +1,15 @@
+<h3>좋아요 누른 글</h3>
+
+{% if post_list %}
+    {% for post in post_list %}
+        <div>
+            {{ post.subject }}<br>
+            {{ post.content }}<br>
+            {{ post.create_date|date:"m/d"}}<br>
+            <hr>
+        </div>
+    {% endfor %}
+{% else %}
+    <div>내가 작성한 글이 없습니다</div>
+{% endif %}
+
