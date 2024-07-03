@@ -1,4 +1,8 @@
-
+{% if user.is_authenticated %}
+    <label>{{ user.nickname }}</label><br>
+{% else %}
+    <a href="{% url 'accounts:login' %}">로그인 후 이용해 주세요</a>
+{% endif %}
 <div>
     <label>나의 활동</label><br><br>
     <a href="{% url 'mypage:my_post' %}">내가 쓴 글</a><br>
@@ -6,6 +10,6 @@
 </div>
 <div>
     <label>부동산 스터디</label><br><br>
-    <a>퀴즈 저장 기록</a><br>
+    <a href="{% url 'mypage:my_quiz' %}">퀴즈 저장 기록</a><br>
     <a>플래시 카드 저장 기록</a>
 </div>
