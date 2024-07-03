@@ -1,0 +1,14 @@
+<h3>플래시 기록</h3>
+
+{% if card_list %}
+    {% for card in card_list %}
+        <div>
+            <a href="{% url 'study:flashCardContent' card.flashcard.id %}">
+                {{ card.flashcard.subject }}
+            </a><br>
+        <hr>
+        </div>
+    {% endfor %}
+{% else %}
+    <div>내가 저장한 플래시 카드가 없습니다</div>
+{% endif %}
