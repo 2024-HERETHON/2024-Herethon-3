@@ -1,0 +1,16 @@
+<h3>내가 쓴 글</h3>
+
+{% if post_list %}
+    {% for post in post_list %}
+    <div>
+        <a href="{% url 'board:post_detail' post.id %}">
+            {{ post.subject }}<br>
+            {{ post.content }}<br>
+            {{ post.create_date|date:"m/d"}}<br>
+        </a>
+        <hr>
+    </div>
+    {% endfor %}
+{% else %}
+    <div>내가 작성한 글이 없습니다</div>
+{% endif %}

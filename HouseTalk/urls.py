@@ -21,4 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('board/', include('board.urls')),
     path('accounts/',include('accounts.urls', namespace='accounts')),
+    path('my-page/', include('mypage.urls',namespace='mypage')),
+    path('study/', include('study.urls', namespace='study')),  # 스터디 
 ]
