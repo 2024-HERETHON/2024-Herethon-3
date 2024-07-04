@@ -12,5 +12,6 @@
             <li><a href="{% url 'study:flashCardSubject' flashcard.id %}">{{ flashcard.subject }}</a></li>
         {% endfor %}
     </ul>
+    <a href="{% url 'study:studyHome' %}">스터디 홈으로 돌아가기</a><br>
 </body>
 </html>
