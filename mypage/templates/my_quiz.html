@@ -1,0 +1,14 @@
+<h3>퀴즈 기록</h3>
+
+{% if answer_list %}
+    {% for answer in answer_list %}
+        <div>
+            <a href="{% url 'study:question' answer.quiz.id %}">
+                {{ answer.quiz.title }}
+            </a><br>
+        <hr>
+        </div>
+    {% endfor %}
+{% else %}
+    <div>내가 기록한 퀴즈가 없습니다</div>
+{% endif %}
