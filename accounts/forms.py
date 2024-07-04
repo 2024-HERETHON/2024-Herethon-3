@@ -1,7 +1,10 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, SetPasswordForm
+from django.contrib.auth.forms import PasswordResetForm as AuthPasswordResetForm, SetPasswordForm as AuthSetPasswordForm
 from .models import CustomUsers
+from django.core.exceptions import ValidationError
 
+""" 회원가입 """
 class SignupForm(UserCreationForm):
     userId = forms.CharField(max_length=15, label='id', required=True)
     userEmail = forms.EmailField(label='email', required=True)
@@ -54,3 +57,25 @@ class SignupForm(UserCreationForm):
         if commit:
             user.save()
         return user
+    
+
+""" 비밀번호 재설정 """
+class CustomPasswordResetForm(AuthPasswordResetForm):
+    email = forms.EmailField(label="이메일", max_length=254)
+
+class CustomSetPasswordForm(AuthSetPasswordForm):
+    new_password1 = forms.CharField(label="새 비밀번호", widget=forms.PasswordInput)
+    new_password2 = forms.CharField(label="새 비밀번호 확인", widget=forms.PasswordInput)
+
+    def clean_new_password1(self):
+        new_password1 = self.cleaned_data.get('new_password1')
+        if len(new_password1) < 6:
+            raise ValidationError('비밀번호는 최소 6자 이상이어야 합니다.')
+        return new_password1
+
+    def clean_new_password2(self):
+        new_password1 = self.cleaned_data.get('new_password1')
+        new_password2 = self.cleaned_data.get('new_password2')
+        if new_password1 and new_password2 and new_password1 != new_password2:
+            raise ValidationError('비밀번호가 일치하지 않습니다.')
+        return new_password2
