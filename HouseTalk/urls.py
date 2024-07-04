@@ -24,3 +24,5 @@ urlpatterns = [
     path('my-page/', include('mypage.urls',namespace='mypage')),
     path('study/', include('study.urls', namespace='study')),  # 스터디 
 ]
+from accounts import views
+path('', views.login, name='login'),

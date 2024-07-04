@@ -1,11 +1,13 @@
 <h3>플래시 기록</h3>
 
-{% if card_list %}
-    {% for card in card_list %}
+{% if flash_list %}
+    {% for flash in flash_list %}
         <div>
-            <a href="{% url 'study:flashCardContent' card.flashcard.id %}">
-                {{ card.flashcard.subject }}
-            </a><br>
+            <a href="{% url 'study:flashCardContent' flash.flashcard.id %}">
+                {{ flash.flashcard.subject }}
+            </a>
+            <a href="{% url 'mypage:flash_delete' flash.id %}">삭제</a>
+            <br>
         <hr>
         </div>
     {% endfor %}

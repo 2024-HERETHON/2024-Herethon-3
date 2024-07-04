@@ -6,9 +6,11 @@ from django.core.exceptions import ValidationError
 
 """ 회원가입 """
 class SignupForm(UserCreationForm):
-    userId = forms.CharField(max_length=15, label='id', required=True)
-    userEmail = forms.EmailField(label='email', required=True)
-    nickname = forms.CharField(max_length=15, label='nickname', required=True)
+    userId = forms.CharField(max_length=15, label='아이디', required=True, widget=forms.TextInput(attrs={'placeholder': '아이디 입력'}))
+    userEmail = forms.EmailField(label='이메일', required=True, widget=forms.EmailInput(attrs={'placeholder': '이메일 입력', 'style': 'width: 267px;'}))
+    nickname = forms.CharField(max_length=15, label='닉네임', required=True, widget=forms.TextInput(attrs={'placeholder': '닉네임 입력'}))
+    password1 = forms.CharField(label='비밀번호', widget=forms.PasswordInput(attrs={'placeholder': '비밀번호 입력'}))
+    password2 = forms.CharField(label='비밀번호 확인', widget=forms.PasswordInput(attrs={'placeholder': '비밀번호 확인'}))
 
     class Meta:
         model = CustomUsers
@@ -61,11 +63,13 @@ class SignupForm(UserCreationForm):
 
 """ 비밀번호 재설정 """
 class CustomPasswordResetForm(AuthPasswordResetForm):
-    email = forms.EmailField(label="이메일", max_length=254)
+    email = forms.EmailField(label=False, max_length=254,widget=forms.EmailInput(attrs={'placeholder': '이메일 입력', 'class': 'form-control'})
+    )
+    
 
 class CustomSetPasswordForm(AuthSetPasswordForm):
-    new_password1 = forms.CharField(label="새 비밀번호", widget=forms.PasswordInput)
-    new_password2 = forms.CharField(label="새 비밀번호 확인", widget=forms.PasswordInput)
+    new_password1 = forms.CharField(label="False", widget=forms.PasswordInput(attrs={'placeholder': '새 비밀번호 입력'}))
+    new_password2 = forms.CharField(label="False", widget=forms.PasswordInput(attrs={'placeholder': '새 비밀번호 확인'}))
 
     def clean_new_password1(self):
         new_password1 = self.cleaned_data.get('new_password1')
@@ -79,3 +83,4 @@ class CustomSetPasswordForm(AuthSetPasswordForm):
         if new_password1 and new_password2 and new_password1 != new_password2:
             raise ValidationError('비밀번호가 일치하지 않습니다.')
         return new_password2
+    
