@@ -16,7 +16,7 @@
 {% if user.is_authenticated %}
     <div>
         <label>계정 관리</label><br><br>
-        <a>비밀번호 재설정</a><br>
+        <a a href="{% url 'accounts:reset_password' %}">비밀번호 재설정</a><br>
         <a a href="{% url 'accounts:logout' %}">로그아웃</a>
     </div>
 {% endif %}

@@ -5,7 +5,9 @@
         <div>
             <a href="{% url 'study:question' answer.quiz.id %}">
                 {{ answer.quiz.title }}
-            </a><br>
+            </a>
+            <a href="{% url 'mypage:quiz_delete' answer.id %}">삭제</a>
+            <br>
         <hr>
         </div>
     {% endfor %}

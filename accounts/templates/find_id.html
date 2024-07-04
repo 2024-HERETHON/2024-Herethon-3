@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>아이디 찾기</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        .error {
+            color: red;
+        }
+        .success {
+            color: green;
+        }
+        .form-field {
+            margin-bottom: 15px;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#verify-email").click(function(){
+                var email = $("#email").val();
+                $.ajax({
+                    url: "{% url 'accounts:verify_email' %}",
+                    method: "POST",
+                    data: {
+                        'email': email,
+                        'csrfmiddlewaretoken': '{{ csrf_token }}'
+                    },
+                    success: function(response){
+                        var messageDiv = $("#email-message");
+                        if(response.exists){ 
+                            messageDiv.html("인증되었습니다. 사용자의 아이디는: " + response.userId + 
+                            "<br><a href='{% url 'accounts:login' %}'>로그인 페이지로 이동</a>").addClass("success").removeClass("error");
+                        } else {
+                            messageDiv.html("해당 이메일이 존재하지 않습니다.").addClass("error").removeClass("success");
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>아이디 찾기</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <div class="form-field">
+            <label for="email">이메일:</label>
+            <input type="email" id="email" name="email" required>
+            <button type="button" id="verify-email">이메일 인증</button>
+            <div id="email-message"></div> <!-- 이메일 인증(중복) 확인 메시지 -->
+        </div>
+    </form>
+</body>
+</html>

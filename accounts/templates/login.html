@@ -21,5 +21,13 @@
         <br>
         <input type="submit" value="로그인">
     </form>
+
+    <hr>
+
+    <div>
+        <a href="{% url 'accounts:find_id' %}">아이디 찾기</a>
+        <a href="{% url 'accounts:reset_password' %}">비밀번호 재설정</a>
+        <a href="{% url 'accounts:signup' %}">회원가입</a>
+    </div>
 </body>
 </html>
