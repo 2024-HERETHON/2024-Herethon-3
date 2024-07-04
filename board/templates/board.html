@@ -1,0 +1,85 @@
+<h2>게시판</h2>
+
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>전체 게시판</title>
+    <body>
+    <div class="container">
+        <a href="{% url 'board:area_set' %}">지역 설정</a>
+        <a href="{% url 'board:post_search' %}">검색</a><br><br><br>
+
+        {% for post in hot_posts %}
+        <div>
+            <h5>Q&A</h5>
+            <a href="{% url 'board:post_detail' post.id%}">{{ post.subject }}</a>
+            <br>👁️{{ post.hits }} 🗒️{{ post.answer_set.count }}
+        </div>
+        {% endfor %}
+        <br><br><br>
+
+        <div>
+            <select class="so">
+                <option value="recent" {% if so == 'recent' %} selected {% endif %}>최신순</option>
+                <option value="hit" {% if so == 'hit' %} selected {% endif %} >조회수</option>
+                <option value="answer" {% if so == 'answer' %} selected {% endif %}>댓글순</option>
+            </select>
+        </div>
+        <form id="sortForm" method="get" action="{% url 'board:board' %}">
+            <input type="hidden" id="so" name="so" value="{{ so }}">
+        </form>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>제목</a></th>
+                    <th>작성일</th>
+                    <th>조회수</th>
+                    <th>좋아요</th>
+                    <th>지역</th>
+                    <th>내용</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for post in post_list %}
+                <tr>
+                    <td><a href="{% url 'board:post_detail' post.id%}">{{ post.subject }}</a>
+                        {% if post.answer_set.count > 0 %}
+                        <span>({{ post.answer_set.count }})</span>
+                        {% else %}
+                        <span>(0)</span>
+                        {% endif %}
+                    </td>
+                    <td>{{ post.create_date|date:"Y-m-d" }}</td>
+                    <td>{{ post.hits }}</td>
+                    <td>{{ post.likes }}</td>
+                    <td>{{ post.area }}</td>
+                    <td>{{ post.content }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="6">등록된 글이 없습니다.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% with area=area|default:None %}
+        {% include "navbar.html" %}
+    {% endwith %}
+</body>
+</html>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(".so").on('change', function(){
+            $("#so").val($(this).val());
+            $("#sortForm").submit()
+        });
+
+        $(".create").on('click', function(){
+            alert("좌측 상단에서 지역을 설정해주세요")
+        });
+    })
+</script>

@@ -1,0 +1,7 @@
+<h2>궁금한 내용을 검색해보세요.</h2>
+<form method="post">
+    {% csrf_token %}        
+    <input type="search" placeholder="글 제목, 내용" name="searched" aria-label="Search">
+    <button type="submit">검색</button>
+</form>
+<a href="{% url 'board:board' %}">취소</a>
