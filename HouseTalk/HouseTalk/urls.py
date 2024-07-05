@@ -1,4 +1,3 @@
-
 """
 URL configuration for HouseTalk project.
 
@@ -16,14 +15,8 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
-from accounts import views
+from django.urls import path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',views.login, name='login'),
-    path('board/', include('board.urls')),
-    path('accounts/',include('accounts.urls', namespace='accounts')),
-    path('my-page/', include('mypage.urls',namespace='mypage')),
-    path('study/', include('study.urls', namespace='study')),  # 스터디 
 ]

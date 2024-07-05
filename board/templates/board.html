@@ -1,0 +1,110 @@
+{% load static %}
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>전체 게시판</title>
+    <link rel="stylesheet" href="{% static 'css/board.css' %}">
+    <body>
+        
+        <div class="header">
+        <div class="timeZone"></div>
+        <div class="searchBar">
+            <a href="{% url 'board:area_set' %}">
+                <select class="select">
+                <option>지역을 선택해주세요</option>
+            </select>
+        </a>
+        <a href="{% url 'board:post_search' %}"></div></a><br></div>
+        <div class="whiteBox">
+            <!--흰상자-->
+            <section class="content">
+                <div>
+                    <!--핫한집톡-->
+                    <p><b>HOT</b> 한 뉴스🔥</p></div>
+
+                    <div class="slide">
+        {% for post in hot_posts %}
+        <div class="slideBox1">
+            <div class="boxContent">
+                <a href="{% url 'board:info_detail' post.id%}">
+                    <div class="cateName"><!--게시판 이름-->Q&A</div>
+                    <div class="slideTitle"><!--제목-->{{ post.subject }}</div><br/>
+                    <div class="slideBy"><!--작성자--><div style="display:flex; ">
+                        <div style="display:flex;margin-right:10px;">
+                        <img class="catePost-eyes" src="{% static 'img/tabler_eye-filledeyeicon.svg' %}" />
+                        <div id="eyes-count">{{ post.hits }}</div></div>
+                        <div style="display:flex">
+                        <img class="catePost-reply" src="{% static 'img/Vectorcomment.svg' %}" />
+                        <div id="reply-count">{{ post.answer_set.count }}</div></div>
+                        </div></div>
+        </div></a></div>
+        {% endfor %}
+        </div>
+        <br>
+
+        <div>
+            <select class="so">
+                <option value="recent" {% if so == 'recent' %} selected {% endif %}>최신순</option>
+                <option value="hit" {% if so == 'hit' %} selected {% endif %} >조회수</option>
+                <option value="answer" {% if so == 'answer' %} selected {% endif %}>댓글순</option>
+            </select>
+        </div>
+        <form id="sortForm" method="get" action="{% url 'board:board' %}">
+            <input type="hidden" id="so" name="so" value="{{ so }}">
+        </form>
+<br/>
+        <div><!--글리스트-->
+            {% for post in post_list %}
+            <a href="{% url 'board:post_detail' post.id%}"><div class="catePost">
+                <div class="catePost-title">
+                    {{ post.subject }}</div>
+                    
+                <div class="catePost-content">
+                    {{ post.content }}</div>
+                <div class="catePost-detail">
+                    <div style="display:flex; margin-right: 20px;">
+                    <img class="catePost-eyes" src="{% static 'img/tabler_eye-filledeyeicon.svg' %}" />&nbsp;
+                    <div id="eyes-count">{{ post.hits }}</div></div>
+                    <div style="display:flex">
+                    <img class="catePost-reply" src="{% static 'img/Vectorcomment.svg' %}" />&nbsp;
+                    <div id="reply-count">
+                        {% if post.answer_set.count > 0 %}
+                        {{ post.answer_set.count }}
+                        {% else %}
+                        0
+                        {% endif %}
+                    </div></div>
+                    
+                </div></div></a>
+
+                {% empty %}
+                <div>등록된 글이 없습니다</div>
+                {% endfor %}
+        </div> 
+    </section>
+    
+</div>
+       </div>
+
+    {% with area=area|default:None %}
+        {% include "navbar.html" %}
+    {% endwith %}
+    
+</body>
+
+</html>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(".so").on('change', function(){
+            $("#so").val($(this).val());
+            $("#sortForm").submit()
+        });
+
+        $(".create").on('click', function(){
+            alert("좌측 상단에서 지역을 설정해주세요")
+        });
+    })
+</script>

@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>플래시카드 저장 기록</title>
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    </head>
+    <body>
+        <div id="wrap">
+            <div class="study-wrapper">
+                <header id="Qsavings-upheader">
+                    <button class="bak-button" type="button" onClick="location.href='http://127.0.0.1:8000/study/'">
+                        <div class="back"></div>
+                    </button>
+                    <div class="signup-h"><span>플래시 카드 저장 기록</span></div>
+                </header>
+                <div class="Qsavings-wrapper">
+                    {% for flashcard in flashcards %}
+                    <div class="Qsaving">
+                        
+                            <a href="{% url 'study:flashCardSubject' flashcard.id %}">
+                                <div class="quiz-savings">
+                                <span class="savings-text">{{ flashcard.subject }}</span>
+                                </div>
+                            </a>
+                        
+                    </div>
+
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

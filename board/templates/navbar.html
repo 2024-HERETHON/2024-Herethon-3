@@ -1,0 +1,34 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <title>전체 게시판</title>
+        <link rel="stylesheet" href="{% static 'css/board.css' %}" />
+    </head>
+
+    <body>
+        <div class="underBar">
+            <!--하단바-->
+
+            <a href="{% url 'study:studyHome' %}"><img src="{% static 'img/하단study.svg' %}" class="quize" /></a>
+            <a href="{% url 'board:board' %}"><img src="{% static 'img/하단homeB.svg' %}" class="home" /></a>
+            <a href="{% url 'mypage:my_page' %}"><img src="{% static 'img/하단myJ.svg' %}" class="mypage" /></a>
+        </div>
+
+        <nav class="plus">
+            {% if area %}
+
+            <a href="{% url 'board:post_create' area %}"
+                ><img class="plusIcon" src="{% static 'img/plusButton-removebg-preview.png' %}"
+            /></a>
+            {% else %}
+            <!--<a href="{% url 'board:post_create' area %}" class="create">➕</a>-->
+            {% endif %}
+        </nav>
+    </body>
+</html>
+
+<!--홈버튼 부분 색다른 사진 넣기-->

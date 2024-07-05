@@ -1,0 +1,181 @@
+body {
+    width: 390px;
+    margin: 0px;
+    background-color: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header {
+    width: 393px;
+    height: 115px;
+    background-color: #f5f5f5;
+}
+.timeZone {
+    height: 60px;
+}
+.timeZone {
+    height: 60px;
+}
+.goBack {
+    margin-left: 19px;
+}
+.whiteBox {
+    width: 353px;
+
+    border-radius: 20px;
+    background-color: white;
+    margin: 21px;
+}
+
+.underBar {
+    width: 390px;
+    height: 95px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 0;
+    background-color: white;
+}
+.underBar .quize,
+.mypage {
+    width: 38px;
+    height: 50px;
+}
+.underBar .plus {
+    width: 68px;
+    height: 68px;
+}
+.cateName {
+    font-size: 10pt;
+}
+.slideTitle {
+    font-size: 15pt;
+    margin-top: 10px;
+}
+.slideBy {
+    font-size: 10pt;
+    margin-top: 10px;
+}
+.myPage {
+    text-align: center;
+}
+article {
+    margin-top: 25px;
+    margin-left: 24px;
+}
+.mine,
+.study {
+    font-size: 10pt;
+}
+.myContent,
+.myQuize {
+    margin-top: 27px;
+}
+.myScrap,
+.myCard {
+    margin-top: 29px;
+}
+.profile img {
+    width: 77px;
+    height: 77px;
+}
+.edit img {
+    width: 33px;
+    height: 33px;
+}
+.profileBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.overLap {
+    display: flex;
+}
+.myQuize,
+.myCard,
+.myContent,
+.myContent {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+a {
+    text-decoration: none;
+    color: black;
+}
+a:visited {
+    text-decoration: none;
+    color: black;
+}
+.byMe {
+    text-align: center;
+    margin: 0 auto;
+    font-weight: bold;
+}
+.flexBox {
+    display: flex;
+}
+.content {
+    margin: 23px;
+}
+.cateBox {
+    border: 1px solid #e3e3e3;
+
+    margin-bottom: 1vh;
+    background-color: #f9f9f9;
+    margin: 0 0 1vh 0;
+    padding: 0;
+}
+
+.catePost {
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+    font-size: small;
+
+    border-bottom: 1px solid #e3e3e3;
+}
+
+.catePost-title {
+    font-weight: bold;
+    margin-bottom: 3px;
+}
+
+.catePost-detail {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: #a6a6a6;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: smaller;
+}
+.nickName {
+    color: black;
+}
+
+.plus {
+    width: 390px;
+    height: 95px;
+    position: fixed;
+    bottom: 60px;
+    left: 340px;
+    right: 0;
+    padding: 0;
+}
+
+.underBar img {
+    width: 38px;
+    height: 50px;
+}
+.plusIcon {
+    width: 50px;
+    height: 50px;
+}

@@ -1,0 +1,159 @@
+body {
+    width: 390px;
+    height: 844px;
+    background-color: white;
+}
+.header {
+    width: 393px;
+    height: 115px;
+    background-color: white;
+}
+.timeZone {
+    height: 60px;
+}
+
+.text {
+    padding: 10px 85px 10px 10px;
+    border: 0;
+    width: 100%;
+    height: 40px;
+    line-height: 20px;
+    box-sizing: border-box;
+    color: #262626;
+    font-size: 13px;
+    overflow: hidden;
+    resize: none;
+    background-color: transparent;
+}
+.writecomment {
+    display: flex;
+    margin: 19px;
+}
+.commentDetail {
+    display: flex;
+    margin: 19px;
+    align-items: center;
+}
+.commentProfile {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    margin-top: 0px;
+}
+
+.profileImg2 {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    margin-top: 0px;
+}
+.nickandthumb {
+    display: flex;
+    justify-content: space-between;
+    width: 300px;
+}
+.commentSection {
+    height: 25px;
+}
+.nickName {
+    font-size: 10pt;
+}
+.time {
+    font-size: 5pt;
+    margin-bottom: 3px;
+    color: #727272;
+}
+
+.thumb img {
+    width: 11px;
+    height: 9px;
+}
+.thumb span {
+    font-size: 5pt;
+    color: rgb(82, 113, 255);
+}
+.heart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.hhh {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+.underBar {
+    width: 390px;
+    height: 95px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 0;
+    background-color: white;
+}
+.underBar .quize,
+.mypage {
+    width: 38px;
+    height: 50px;
+}
+.underBar .plus {
+    width: 68px;
+    height: 68px;
+}
+.sectionBox {
+    margin: 19px;
+    margin-bottom: 10px;
+}
+.communityContent {
+    margin: 19px;
+    margin-top: 0px;
+    padding-top: 20px;
+    border-top: 1px solid #e3e3e3;
+    font-size: 12pt;
+}
+button {
+    border: none;
+    margin: 5px;
+    background-color: rgba(255, 255, 255, 0);
+}
+.goBack {
+    margin-left: 19px;
+}
+.sectionDetail {
+    display: flex;
+
+    margin-top: 12px;
+}
+.sectionTitle {
+    font-size: 15pt;
+    margin-top: 12px;
+}
+.sectionCate {
+    font-size: 10pt;
+}
+.writecomment {
+    border: 1px solid #e3e3e3;
+    border-radius: 15px;
+}
+.sectionCate {
+    color: #727272;
+}
+.clean {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 43px;
+    height: 15px;
+    border: 1px;
+    border-radius: 20px;
+    background-color: rgb(82, 113, 255, 20%);
+}

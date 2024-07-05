@@ -1,0 +1,33 @@
+{% load static %}
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로그인 페이지</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    {% if error_message %}
+    <p style="color: red;">{{ error_message }}</p>  <!-- 에러 메시지 출력 -->
+    {% endif %}
+    <div id="wrap">
+        <div class="login-wrapper">
+            <header id="login-header">
+                <div class="logo-header"></div>
+                <div ><span class="logo-text">안심할 수 있는 집 이야기, 안심집톡</span></div>
+            </header>
+            <form method="post" id="login-form">
+                {% csrf_token %}
+                <input type="text" name="userId" placeholder="아이디 입력">
+                <input type="password" name="password" placeholder="비밀번호 입력">
+                <input class="login-submit" type="submit" value="로그인">
+                <div class="login_others">
+                    <button type="button" class="login_other" onclick="location.href='{% url 'accounts:find_id' %}'">아이디 찾기</button>
+                    <button type="button" class="login_other" onclick="location.href='{% url 'accounts:reset_password' %}'">비밀번호 찾기</button>
+                    <button type="button"  class="login_other"onclick="location.href='{% url 'accounts:signup' %}'"><span>회원가입</span></a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

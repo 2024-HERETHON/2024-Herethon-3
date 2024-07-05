@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <title>전체 게시판</title>
+        <link rel="stylesheet" href="{% static 'css/mypage.css' %}" />
+        <style>
+            .whiteBox{
+                min-height:800px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="header">
+            <!--헤더-->
+            <div class="timeZone"></div>
+            <div class="flexBox">
+                <a href="{% url 'mypage:my_page' %}"><img src="{% static 'img/Vectorback.svg' %}" class="goBack" /></a>
+                <div class="byMe">좋아요 누른 글</div>
+            </div>
+        </div>
+        <div class="whiteBox"><!--흰상자-->
+            <section class="content">
+
+{% if post_list %}
+    {% for post in post_list %}
+
+    <br/>
+    <div><!--글리스트-->
+        <a href="{% url 'board:post_detail' post.id %}">
+        <div class="catePost">
+            <div class="catePost-title">
+                {{ post.subject }}                </div>
+            <div class="catePost-content">
+                {{ post.content }}                </div>
+            <div class="catePost-detail">
+                {{ post.create_date|date:"m/d"}}
+                </div>
+            </div>
+        </a>
+            </div>
+
+    {% endfor %}
+{% else %}
+    <div>내가 작성한 글이 없습니다</div>
+{% endif %}
+
+    </body></html>

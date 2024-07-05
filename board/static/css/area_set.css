@@ -1,0 +1,125 @@
+body {
+    width: 390px;
+    height: 844px;
+    padding: 0px;
+    margin: 0px;
+    background-color: white;
+}
+.header {
+    width: 393px;
+    height: 115px;
+    background-color: white;
+}
+.timeZone {
+    height: 60px;
+}
+.header2 {
+    display: flex;
+    justify-content: space-between;
+    margin-right: 17px;
+    margin-left: 17px;
+}
+.submitButton {
+    width: 50px;
+    height: 23px;
+    line-height: 23px;
+    border: 0px;
+    border-radius: 20px;
+    background-color: #5271ff;
+    color: white;
+    font-size: 7pt;
+}
+.districtCate {
+    background-color: #f6f6f6;
+    font-size: 10pt;
+    border-top: 1px solid #727272;
+    border-bottom: 1px solid #727272;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.districtCate div {
+    width: 118px;
+    height: 38px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.si {
+    border-right: 1px solid #727272;
+}
+.gu {
+    border-right: 1px solid #727272;
+}
+.cateDetail {
+    display: flex;
+    flex-direction: row;
+}
+.siCate,
+.guCate {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.guCate {
+    width: 129px;
+    border-left: solid 1px #727272;
+    border-right: solid 1px #727272;
+}
+
+.dongCate {
+    width: 134px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.siCate button {
+    width: 112px;
+    min-height: 38px;
+    font-size: 10pt;
+    align-content: center;
+    justify-content: center;
+    margin: 6px;
+    margin-right: 6px;
+    margin-left: 6px;
+}
+
+.guCate button {
+    width: 112px;
+    min-height: 38px;
+    font-size: 10pt;
+    align-content: center;
+
+    margin: 6px;
+    margin-right: 8px;
+    margin-left: 8px;
+}
+.dongCate button {
+    width: 112px;
+    min-height: 38px;
+    font-size: 10pt;
+    align-content: center;
+
+    margin: 6px;
+    margin-right: 10px;
+    margin-left: 12px;
+}
+
+.active1 {
+    background-color: #fb86a0;
+    color: white;
+}
+
+.active3 {
+    background-color: #ffeff3;
+    color: #fb86a0;
+}
+.active2 {
+    background-color: #ffd5df;
+    color: #fb86a0;
+}
+.siCate button,
+.guCate button,
+.dongCate button {
+    border: 0px solid;
+}

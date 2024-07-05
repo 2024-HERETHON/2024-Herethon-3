@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>{{ quiz.title }}</title>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+        <link rel="stylesheet" href="{% static 'css/board.css' %}" />
+    </head>
+    <body>
+        <div id="wrap">
+            <div class="study-wrapper">
+                <header id="signup-header">
+                    <button class="bak-button" type="button" onClick="history.go(-1)"><div class="back"></div></button>
+                    <div class="signup-h"><span>{{ quiz.title }}</span></div>
+                    <button class="quiz-save" type="button">저장</button>
+                </header>
+                <div class="quiz-wrapper">
+                    <div class="question">Q. <span>{{ quiz.question}}</span></div>
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="answer-radio">
+                            <input class="answer" type="radio" id="first-radio" name="answer" value="1" checked />
+                            <label class="ansR-text">{{ quiz.options1 }}</label>
+                        </div>
+                        <div class="answer-radio">
+                            <input class="answer" type="radio" name="answer" value="2" />
+                            <label class="ansR-text">{{ quiz.options2 }}</label>
+                        </div>
+                        <div class="answer-radio">
+                            <input class="answer" type="radio" name="answer" value="3" />
+                            <label class="ansR-text">{{ quiz.options3 }}</label>
+                        </div>
+                        <div class="answer-radio">
+                            <input class="answer" type="radio" name="answer" value="4" />
+                            <label class="ansR-text">{{ quiz.options4 }}</label>
+                        </div>
+                        <button class="answer-return" type="submit">정답보기</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

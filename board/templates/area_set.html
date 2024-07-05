@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="{% static 'css/area_set.css' %}" />
+        <title>Document</title>
+    </head>
+    <body>
+        <div class="header">
+            <!--헤더-->
+            <div class="timeZone"></div>
+            <div class="header2">
+                <a src="{% url 'board:area_set' %}">
+                    <!-- <img src="./img/ph_x-bold.svg" class="xxx" /> -->
+                </a>
+                <div>지역 설정</div>
+                <button type="submit" class="submitButton">완료</button>
+            </div>
+        </div>
+
+        <!--시도 카테고리-->
+        <div class="districtCate">
+            <div class="si">시/도&nbsp;</div>
+            <div class="gu">시/군/구&nbsp;</div>
+            <div class="dong">동/읍/면&nbsp;</div>
+        </div>
+        <section class="cateDetail">
+            <div class="siCate" id="siCate">
+                <button>서울</button>
+                <button>경기</button>
+                <button>인천</button>
+                <button>강원</button>
+                <button>대전</button>
+                <button>세종</button>
+                <button>충남</button>
+                <button>충북</button>
+                <button>부산</button>
+                <button>울산</button>
+                <button>경남</button>
+                <button>경북</button>
+                <button>대구</button>
+                <button>광주</button>
+                <button>전남</button>
+                <button>전북</button>
+                <button>제주</button>
+            </div>
+
+            <!--구-->
+            <div class="guCate" id="guCate">
+                <div></div>
+            </div>
+            <!--동-->
+            <div class="dongCate" id="dongCate">
+                <div></div>
+            </div>
+
+            <form id="districtForm" style="display: none" method="post" action="{% url 'board:area_set' %}">
+                {% csrf_token %}
+                <input type="hidden" id="selectedSi" name="si" />
+                <input type="hidden" id="selectedGu" name="gu" />
+                <input type="hidden" id="selectedDong" name="dong" />
+            </form>
+        </section>
+    </body>
+    <script src="{% static 'js/area_set.js' %}"></script>
+</html>
