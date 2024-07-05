@@ -1,6 +1,18 @@
 from django.db import models
 from accounts.models import CustomUsers
 
+class Info(models.Model):
+    subject = models.CharField(max_length=200)
+    content1 = models.TextField()
+    content2 = models.TextField()
+    create_date = models.DateTimeField()
+    hits = models.IntegerField(default=0)
+
+    @property
+    def update_hits(self):
+        self.hits += 1
+        self.save()
+
 class Post(models.Model):
     subject = models.CharField(max_length=200)
     content = models.TextField()

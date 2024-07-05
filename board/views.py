@@ -1,12 +1,11 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Post, Answer, Comment
+from .models import Post, Answer, Comment, Info
 from .forms import PostForm, AnswerForm, CommentForm, AreaForm
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q, Count, F, Value
 from django.db.models.functions import Coalesce
 from django.contrib import messages
-
 def board(request):
 
     # 정렬 기준
@@ -22,12 +21,20 @@ def board(request):
         post_list = Post.objects.order_by('-create_date')
 
     # 인기 게시글
-    hot_posts = Post.objects.annotate(
-        num=Coalesce(Count('answer'), Value(0)) + Coalesce(F('hits'), Value(0))
-    ).order_by('-num', '-create_date')[:5]
+    # hot_posts = Post.objects.annotate(
+    #     num=Coalesce(Count('answer'), Value(0)) + Coalesce(F('hits'), Value(0))
+    # ).order_by('-num', '-create_date')[:5]
+
+    hot_posts = Info.objects.order_by('-create_date')[:5]
     
     context = {'post_list' : post_list, 'so':so, 'hot_posts':hot_posts}
     return render(request, 'board.html', context)
+
+# 정보 게시글 페이지
+def info_detail(request, info_id):
+    info = get_object_or_404(Info, pk=info_id)
+    context = {'info':info}
+    return render(request, 'info_detail.html', context)
 
 # 전체 게시글 검색 기능
 def post_search(request):

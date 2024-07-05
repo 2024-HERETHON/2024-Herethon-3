@@ -21,13 +21,13 @@
             <section class="content">
                 <div>
                     <!--핫한집톡-->
-                    <p><b>HOT</b> 한 집톡🔥</p></div>
+                    <p><b>HOT</b> 한 뉴스🔥</p></div>
 
                     <div class="slide">
         {% for post in hot_posts %}
         <div class="slideBox1">
             <div class="boxContent">
-                <a href="{% url 'board:post_detail' post.id%}">
+                <a href="{% url 'board:info_detail' post.id%}">
                     <div class="cateName"><!--게시판 이름-->Q&A</div>
                     <div class="slideTitle"><!--제목-->{{ post.subject }}</div><br/>
                     <div class="slideBy"><!--작성자--><div style="display:flex; ">
