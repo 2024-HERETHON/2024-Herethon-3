@@ -12,7 +12,7 @@
             <!--헤더-->
             <div class="timeZone"></div>
             <div class="flexBox">
-                <a href="{% url 'mypage:my_page' %}"><img src="./img/Vectorback.svg" class="goBack" /></a>
+                <a href="{% url 'mypage:my_page' %}"><img src="{% static 'img/Vectorback.svg' %}" class="goBack" /></a>
                 <div class="byMe">내가 쓴 글</div>
             </div>
         </div>

@@ -7,13 +7,18 @@
 
         <title>전체 게시판</title>
         <link rel="stylesheet" href="{% static 'css/mypage.css' %}" />
+        <style>
+            .whiteBox{
+                min-height:800px;
+            }
+        </style>
     </head>
     <body>
         <div class="header">
             <!--헤더-->
             <div class="timeZone"></div>
             <div class="flexBox">
-                <a href="{% url 'mypage:my_page' %}"><img src="./img/Vectorback.svg" class="goBack" /></a>
+                <a href="{% url 'mypage:my_page' %}"><img src="{% static 'img/Vectorback.svg' %}" class="goBack" /></a>
                 <div class="byMe">좋아요 누른 글</div>
             </div>
         </div>

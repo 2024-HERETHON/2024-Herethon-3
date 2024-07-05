@@ -523,12 +523,12 @@ body{
 
 
 /* 플래시 카드*/
-.card-wrapper{
-      width: 329px;
-    height: 100%;
+/* .card-wrapper{
+    width: 329px;
+    height: 680px;
     margin: 0 auto;
     background-color: var(--white);
-}
+}  */
 
 .flash-wrapper:active .card-box{
     width: 329px;

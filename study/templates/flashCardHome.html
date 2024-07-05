@@ -5,7 +5,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>플래시카드 저장 기록</title>
-        <link rel="stylesheet" href="{% static 'css/style.css' }" />
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
     </head>
     <body>
         <div id="wrap">
@@ -19,12 +19,13 @@
                 <div class="Qsavings-wrapper">
                     {% for flashcard in flashcards %}
                     <div class="Qsaving">
-                        <div class="quiz-savings">
+                        
                             <a href="{% url 'study:flashCardSubject' flashcard.id %}">
+                                <div class="quiz-savings">
                                 <span class="savings-text">{{ flashcard.subject }}</span>
+                                </div>
                             </a>
-                        </div>
-                        <div class="quit-savings"></div>
+                        
                     </div>
 
                     {% endfor %}

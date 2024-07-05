@@ -14,7 +14,7 @@
         <div class="header">
             <!--헤더-->
             <div class="timeZone"></div>
-            <a href="main_page.html"><img src="./img/Vectorback.svg" class="goBack" /></a>
+            <a href="#"><img src="{% static 'img/Vectorback.svg' %}" class="goBack" /></a>
         </div>
         <section class="sectionBox">
             <div class="sectionCate"><!--공지사항(게시판 이름)-->공지사항</div>
@@ -22,7 +22,7 @@
             <div class="sectionDetail">
                 <div class="commentProfile">
                     <!--프사-->
-                    <img src="./img/iconamoon_profile-circle-fill.svg" class="profileImg2" />
+                    <img src="{% static 'img/iconamoon_profile-circle-fill.svg' %}" class="profileImg2" />
                 </div>
                 <section class="commentSection">
                     <div class="nickandthumb">
@@ -43,9 +43,8 @@
         <div class="heart">
             <a href="#" data-uri="{% url 'board:vote_post' post.id %}" class="recommend">
                 <!--좋아요-->
-                <img src="#" /><br/>
-                <b>하트</b><br/>
-                <b>{{ post.voter.count }}</b></a
+                <div class="hhh"><img src="{% static 'img/Vector.svg' %}" /><br/>
+               {{ post.voter.count }}</div></a
             >
         </div>
         <br/>
@@ -71,7 +70,7 @@
             {% csrf_token %}
             <div class="writecomment">
                 <textarea name="content" id="content" cols="30" rows="15" placeholder="답변을 입력하세요." class="text"></textarea>
-                <button type="submit"><img src="#"></button>
+                <button type="submit"><img src="{% static 'img/Vector (1).svg' %}"></button>
             </div>
         </form>
     </div>
@@ -83,7 +82,7 @@
             <div class="commentDetail">
             <div class="commentProfile">
                 <!--프사-->
-                <img src="./img/iconamoon_profile-circle-fill.svg" class="profileImg2" />
+                <img src="{% static 'img/iconamoon_profile-circle-fill.svg' %}" class="profileImg2" />
             </div>
             <section class="commentSection">
                 <div class="nickandthumb">
@@ -94,8 +93,8 @@
                     <div class="thumb">
                         <!--따봉-->
                         <div class="clean">
-                            <span class="toggle-comment" data-answer-id="{{ answer.id }}"><img src="#" /></span>&nbsp; <span>|</span>&nbsp;
-                        <a href="#" data-uri="{% url 'board:vote_answer' answer.id %}" class="recommend"> <img src="#" /></a>
+                            <span class="toggle-comment" data-answer-id="{{ answer.id }}"><img src="{% static 'img/Vector (2).svg' %}" /></span>&nbsp; <span>|</span>&nbsp;
+                        <span><a href="#" data-uri="{% url 'board:vote_answer' answer.id %}" class="recommend"> <img src="{% static 'img/Vector (3).svg' %}" /></a></span>
                         </div>
                     </div>
                 </div>
@@ -123,7 +122,7 @@
                 <div class="writecomment" >
                     <textarea class="text" name="content" id="content" cols="50" placeholder="대댓글을 입력하세요."></textarea>
                 
-                <button type="submit"><img src="#"></button></div>
+                <button type="submit"><img src="{% static 'img/Vector (1).svg' %}"></button></div>
             </form>
 
         
@@ -134,7 +133,7 @@
                 <div class="commentDetail" style="margin-left:50px">
                     <div class="commentProfile">
                         <!--프사-->
-                        <img src="./img/iconamoon_profile-circle-fill.svg" class="profileImg2" />
+                        <img src="{% static 'img/iconamoon_profile-circle-fill.svg' %}" class="profileImg2" />
                     </div>
                     <section class="commentSection">
                         

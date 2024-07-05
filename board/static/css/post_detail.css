@@ -76,10 +76,16 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    text-align: center;
 }
-.heart b {
-    color: #727272;
-    font-size: 10pt;
+
+.hhh {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 .underBar {
     width: 390px;

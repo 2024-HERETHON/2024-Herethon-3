@@ -1,28 +1,35 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ flashcard.subject }}</title>
-    {% load static %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        
+
+    </style>
 </head>
 <body>
     <div id="wrap">
-        <div class="card-wrapper">
+
             <header id="signup-header">
                 <button class="bak-button" type="button" onClick="history.go(-1)"><div class="back" ></div></button>
                 <div class="signup-h"><span>플래시 카드</span></div>
-                <button class="quiz-save" type="button">저장</button>
+                {% url 'study:saveFlashCard' flashcard.id as flashcard_save_url %}
+                <button class="quiz-save" onclick="location.href='{{ flashcard_save_url }}'" type="button">저장</button>
             </header>
-            <div class="flash-wrapper">
-                <div class="card-box">
-                    <div class="flash-front">
-                        <span class="flash-q">{{ flashcard.subject }}</span>
-                        <span class="flash-qt">답을 보려면 클릭 !</span>
-                    </div>
-                    <div class="flash-back">
-                        <span class="flash-a">{{ flashcard.content }}.</span>
+            <div class="card-wrapper">
+                <div class="flash-wrapper">
+                    <div class="card-box">
+                        <div class="flash-front">
+                            <span class="flash-q">{{ flashcard.subject }}</span>
+                            <span class="flash-qt">답을 보려면 클릭 !</span>
+                        </div>
+                        <div class="flash-back">
+                            <span class="flash-a">{{ flashcard.content }}.</span>
+                        </div>
                     </div>
                 </div>
                 <button class="flash-next" type="button" onclick="location.href='http://127.0.0.1:8000/study/flashcards/'">목록으로</button>

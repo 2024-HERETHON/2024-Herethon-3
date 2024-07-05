@@ -6,6 +6,7 @@
     <title>전체 게시판</title>
     <link rel="stylesheet" href="{% static 'css/board.css' %}">
     <body>
+        
         <div class="header">
         <div class="timeZone"></div>
         <div class="searchBar">
@@ -14,7 +15,7 @@
                 <option>지역을 선택해주세요</option>
             </select>
         </a>
-        <a href="{% url 'board:post_search' %}"><img src="#" /></div></a><br></div>
+        <a href="{% url 'board:post_search' %}"></div></a><br></div>
         <div class="whiteBox">
             <!--흰상자-->
             <section class="content">
@@ -31,10 +32,10 @@
                     <div class="slideTitle"><!--제목-->{{ post.subject }}</div><br/>
                     <div class="slideBy"><!--작성자--><div style="display:flex; ">
                         <div style="display:flex;margin-right:10px;">
-                        <img class="catePost-eyes" src="img/tabler_eye-filledeyeicon.svg" />
+                        <img class="catePost-eyes" src="{% static 'img/tabler_eye-filledeyeicon.svg' %}" />
                         <div id="eyes-count">{{ post.hits }}</div></div>
                         <div style="display:flex">
-                        <img class="catePost-reply" src="img/Vectorcomment.svg" />
+                        <img class="catePost-reply" src="{% static 'img/Vectorcomment.svg' %}" />
                         <div id="reply-count">{{ post.answer_set.count }}</div></div>
                         </div></div>
         </div></a></div>
@@ -63,10 +64,10 @@
                     {{ post.content }}</div>
                 <div class="catePost-detail">
                     <div style="display:flex; margin-right: 20px;">
-                    <img class="catePost-eyes" src="img/tabler_eye-filledeyeicon.svg" />&nbsp;
+                    <img class="catePost-eyes" src="{% static 'img/tabler_eye-filledeyeicon.svg' %}" />&nbsp;
                     <div id="eyes-count">{{ post.hits }}</div></div>
                     <div style="display:flex">
-                    <img class="catePost-reply" src="img/Vectorcomment.svg" />&nbsp;
+                    <img class="catePost-reply" src="{% static 'img/Vectorcomment.svg' %}" />&nbsp;
                     <div id="reply-count">
                         {% if post.answer_set.count > 0 %}
                         {{ post.answer_set.count }}
@@ -82,6 +83,7 @@
                 {% endfor %}
         </div> 
     </section>
+    
 </div>
        </div>
 

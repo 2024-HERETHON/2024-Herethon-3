@@ -19,7 +19,7 @@
                 </select>
             </a>
             <a href="{% url 'board:post_search' %}">
-                <img src="#"/></a>
+                <img src="{% static 'img/Vectorglass.svg' %}"/></a>
             </div>
             <br/>
         </div>
@@ -61,10 +61,10 @@
                                 <div class="slideTitle"><!--제목-->{{ post.subject }}</div><br/>
                                 <div class="slideBy"><!--작성자--><div style="display:flex; ">
                                     <div style="display:flex;margin-right:10px;">
-                                    <img class="catePost-eyes" src="img/tabler_eye-filledeyeicon.svg" />
+                                    <img class="catePost-eyes" src="{% static 'img/tabler_eye-filledeyeicon.svg' %}" />
                                     <div id="eyes-count">{{ post.hits }}</div></div>
                                     <div style="display:flex">
-                                    <img class="catePost-reply" src="img/Vectorcomment.svg" />
+                                    <img class="catePost-reply" src="{% static 'img/Vectorcomment.svg' %}" />
                                     <div id="reply-count">{{ post.answer_set.count }}</div></div>
                                     </div></div>
                     </div></a></div>
@@ -99,10 +99,10 @@
                     {{ post.content }}</div>
                 <div class="catePost-detail">
                     <div style="display:flex; margin-right: 20px;">
-                    <img class="catePost-eyes" src="img/tabler_eye-filledeyeicon.svg" />&nbsp;
+                    <img class="catePost-eyes" src="{% static 'img/tabler_eye-filledeyeicon.svg' %}"/>&nbsp;
                     <div id="eyes-count">{{ post.hits }}</div></div>
                     <div style="display:flex">
-                    <img class="catePost-reply" src="img/Vectorcomment.svg" />&nbsp;
+                    <img class="catePost-reply" src="{% static 'img/Vectorcomment.svg' %}"/>&nbsp;
                     <div id="reply-count">
                         {% if post.answer_set.count > 0 %}
                         {{ post.answer_set.count }}
@@ -117,12 +117,12 @@
                 <br/>
                 <div style="color:red">등록된 글이 없습니다</div>
                 {% endfor %}
-                
+            </div>
         </section>
         
-        </div>
+        
 
-       
+        
     
     </div>
     
