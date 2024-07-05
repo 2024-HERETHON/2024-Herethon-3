@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ quiz.title }}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        .correct-answer {
+            background-color: pink;
+        }
+    </style>
+</head>
+<body>
+
+<div id="wrap">
+    <div class="study-wrapper">
+        <header id="signup-header">
+            <button class="bak-button" type="button" onClick="history.go(-1)"><div class="back"></div></button>
+            <div class="signup-h"><span>{{ quiz.title }}</span></div>
+            <button class="quiz-save" type="button">저장</button>
+        </header>
+        <div class="quiz-wrapper">
+            <div class="question">Q. <span>{{ quiz.question }}</span></div>
+            <div id="answer1" class="answer {% if selected_answer == '1' %}correct-answer{% endif %}">{{ quiz.options1 }}</div>
+            <div id="answer2" class="answer {% if selected_answer == '2' %}correct-answer{% endif %}">{{ quiz.options2 }}</div>
+            <div id="answer3" class="answer {% if selected_answer == '3' %}correct-answer{% endif %}">{{ quiz.options3 }}</div>
+            <div id="answer4" class="answer {% if selected_answer == '4' %}correct-answer{% endif %}">{{ quiz.options4 }}</div>
+            <a href="http://127.0.0.1:8000/study/quiz/"><div class="answer-return" >목록으로</div></a>
+                
+        </div>
+        
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var selectedAnswer = "{{ selected_answer }}";
+        var answerDiv = document.getElementById('answer' + selectedAnswer);
+        if (answerDiv) {
+            answerDiv.classList.add('correct-answer');
+        }
+    });
+</script>
+
+</body>
+</html>
