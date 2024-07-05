@@ -13,7 +13,7 @@
             <header id="signup-header">
                 <button class="bak-button" type="button" onClick="history.go(-1)"><div class="back" ></div></button>
                 <div class="signup-h"><span>플래시 카드</span></div>
-                <button class="quiz-save" type="button">저장</button>
+                <button class="quiz-save" type="button" onclick="location.href='{% url 'study:saveFlashCard' flashcard.id %}'" >저장</button>
             </header>
             <div class="flash-wrapper">
                 <div class="card-box">
@@ -25,7 +25,7 @@
                         <span class="flash-a">{{ flashcard.content }}.</span>
                     </div>
                 </div>
-                <button class="flash-next" type="button" onclick="location.href='http://127.0.0.1:8000/study/flashcards/'">목록으로</button>
+                <button class="flash-next" type="button" onclick="location.href='{% url 'study:flashCardHome' %}'">목록으로</button>
             </div>
 
         </div>

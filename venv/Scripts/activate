@@ -39,10 +39,10 @@ deactivate nondestructive
 if [ "${OSTYPE:-}" = "cygwin" ] || [ "${OSTYPE:-}" = "msys" ] ; then
     # transform D:\path\to\venv to /d/path/to/venv on MSYS
     # and to /cygdrive/d/path/to/venv on Cygwin
-    export VIRTUAL_ENV=$(cygpath "C:\Users\oculo\Desktop\test\womanton\2024-Herethon-3\venv")
+    export VIRTUAL_ENV=$(cygpath "C:\Users\oculo\OneDrive\문서\카카오톡 받은 파일\2024-Herethon-3-복사본\venv")
 else
     # use the path as-is
-    export VIRTUAL_ENV="C:\Users\oculo\Desktop\test\womanton\2024-Herethon-3\venv"
+    export VIRTUAL_ENV="C:\Users\oculo\OneDrive\문서\카카오톡 받은 파일\2024-Herethon-3-복사본\venv"
 fi
 
 _OLD_VIRTUAL_PATH="$PATH"

@@ -8,7 +8,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-set VIRTUAL_ENV=C:\Users\oculo\Desktop\test\womanton\2024-Herethon-3\venv
+set VIRTUAL_ENV=C:\Users\oculo\OneDrive\문서\카카오톡 받은 파일\2024-Herethon-3-복사본\venv
 
 if not defined PROMPT set PROMPT=$P$G
 

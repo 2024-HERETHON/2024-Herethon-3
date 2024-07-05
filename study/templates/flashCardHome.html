@@ -10,8 +10,8 @@
     <div id="wrap">
         <div class="study-wrapper">
             <header id="Qsavings-upheader">
-                <button class="bak-button" type="button" onClick="location.href='http://127.0.0.1:8000/study/'"><div class="back" ></div></button>
-                <div class="signup-h"><span>플래시 카드 저장 기록</span></div>
+                <button class="bak-button" type="button" onclick="location.href='{% url 'study:studyHome' %}'"><div class="back" ></div></button>
+                <div class="signup-h"><span>플래시 카드 목록</span></div>
             </header>
             <div class="Qsavings-wrapper">
                 {% for flashcard in flashcards %}
@@ -21,7 +21,6 @@
                             <span class="savings-text">{{ flashcard.subject }}</span>
                         </a>
                     </div>
-                    <div class="quit-savings"></div>
                 </div>
                 
                 {% endfor %}
