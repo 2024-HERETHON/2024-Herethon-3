@@ -1,0 +1,95 @@
+body {
+    width: 390px;
+    height: 844px;
+    margin: 0px;
+    background-color: white;
+}
+.header {
+    width: 393px;
+    height: 115px;
+    background-color: white;
+}
+.timeZone {
+    height: 60px;
+}
+
+.header2 {
+    display: flex;
+    justify-content: space-between;
+    margin-right: 17px;
+    margin-left: 17px;
+}
+.submitButton {
+    width: 50px;
+    height: 23px;
+    line-height: 23px;
+    border: 0px;
+    border-radius: 20px;
+    background-color: #5271ff;
+    color: white;
+    font-size: 7pt;
+}
+.titletext {
+    padding: 10px;
+    border: solid 1px #ebebeb;
+    width: 350px;
+    height: 40px;
+    border-radius: 10px;
+    line-height: 20px;
+    box-sizing: border-box;
+    color: #262626;
+    font-size: 13px;
+    overflow: hidden;
+    resize: none;
+    white-space: normal;
+}
+.contenttext {
+    padding: 10px;
+    border: solid 1px #ebebeb;
+    width: 350px;
+    height: 367px;
+    line-height: 20px;
+    box-sizing: border-box;
+    color: #262626;
+    font-size: 13px;
+    overflow: hidden;
+    resize: none;
+    border-radius: 10px;
+    white-space: normal;
+}
+
+.inputs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.underBar {
+    width: 390px;
+    height: 95px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 0;
+    background-color: white;
+    border-top: solid 1px #ebebeb;
+}
+.underBar .quize,
+.mypage {
+    width: 38px;
+    height: 50px;
+}
+.underBar .plus {
+    width: 68px;
+    height: 68px;
+}
+.writeTitle {
+    margin-top: 15px;
+}
+.writeContent {
+    margin-top: 15px;
+}

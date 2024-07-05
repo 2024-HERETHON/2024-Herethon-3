@@ -1,13 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Study Home</title>
+    <title>스터디</title>
+    <link rel="stylesheet" href="../../static/css/style.css">
 </head>
 <body>
-    <h1>Study Home</h1>
-    <a href="{% url 'study:quizHome' %}">Quiz Home</a><br>
-    <a href="{% url 'study:flashCardHome' %}">Flash Card Home</a>
+    <div id="wrap">
+        <div class="study-wrapper">
+            <header id="signup-header">
+                <div class="signup-h"><span>스터디</span></div>
+            </header>
+            <div class="study-main">
+                <a href="{% url 'study:quizHome' %}" >
+                    <div class="quiz-card">
+                        <h1 class="studyQ-h1">퀴즈</h1>
+                        <div class="studyQ-under">
+                        <span class="studyQ-text">간단한 퀴즈를 통해<br> 부동산 관련 지식을 얻어<br> 집 마스터가 되어보세요!</span>
+                        <div class="studyQ-img"></div>
+                    </div>
+                    </div>
+                </a>
+                <a href="{% url 'study:flashCardHome' %}">
+                    <div class="flash-card">
+                        <h1 class="studyQ-h1">플래시 카드</h1>
+                        <div class="studyQ-under">
+                            <span class="studyQ-text">가볍게 넘기는 플래스 카드로<br>부동산 관련 지식을 얻어<br> 집 마스터가 되어보세요!</span>
+                            <div class="flash-img"></div>
+                        </div>
+                    </div>
+                </a> 
+            </div>
+            <nav class="tab-bar">
+                <button class="tabS-btn" onclick='location.href="{% url 'study:studyHome' %}"'>
+                    <div class="tab-study">
+                        <div class="study-icon"></div><span>스터디</span>
+                    </div>
+                </button>
+                <button class="tabH-btn" onclick='location.href="{% url 'board:board' %}"'>
+                    <div class="typcn-plus"></div>
+                </button>
+                <button class="tabM-btn" onclick='location.href="{% url 'mypage:my_page' %}"'>
+                    <div class="tab-mypage">
+                        <div class="mypage-icon"></div><span>마이</span>
+                    </div>
+                </button>
+            </nav>
+        </div>
+    </div>
 </body>
 </html>

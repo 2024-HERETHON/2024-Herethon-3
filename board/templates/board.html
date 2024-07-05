@@ -1,22 +1,46 @@
-<h2>게시판</h2>
-
+{% load static %}
 <!DOCTYPE html><html lang="en"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <title>전체 게시판</title>
+    <link rel="stylesheet" href="{% static 'css/board.css' %}">
     <body>
-    <div class="container">
-        <a href="{% url 'board:area_set' %}">지역 설정</a>
-        <a href="{% url 'board:post_search' %}">검색</a><br><br><br>
+        <div class="header">
+        <div class="timeZone"></div>
+        <div class="searchBar">
+            <a href="{% url 'board:area_set' %}">
+                <select class="select">
+                <option>지역을 선택해주세요</option>
+            </select>
+        </a>
+        <a href="{% url 'board:post_search' %}"><img src="#" /></div></a><br></div>
+        <div class="whiteBox">
+            <!--흰상자-->
+            <section class="content">
+                <div>
+                    <!--핫한집톡-->
+                    <p><b>HOT</b> 한 집톡🔥</p></div>
 
+                    <div class="slide">
         {% for post in hot_posts %}
-        <div>
-            <h5>Q&A</h5>
-            <a href="{% url 'board:post_detail' post.id%}">{{ post.subject }}</a>
-            <br>👁️{{ post.hits }} 🗒️{{ post.answer_set.count }}
-        </div>
+        <div class="slideBox1">
+            <div class="boxContent">
+                <a href="{% url 'board:post_detail' post.id%}">
+                    <div class="cateName"><!--게시판 이름-->Q&A</div>
+                    <div class="slideTitle"><!--제목-->{{ post.subject }}</div><br/>
+                    <div class="slideBy"><!--작성자--><div style="display:flex; ">
+                        <div style="display:flex;margin-right:10px;">
+                        <img class="catePost-eyes" src="img/tabler_eye-filledeyeicon.svg" />
+                        <div id="eyes-count">{{ post.hits }}</div></div>
+                        <div style="display:flex">
+                        <img class="catePost-reply" src="img/Vectorcomment.svg" />
+                        <div id="reply-count">{{ post.answer_set.count }}</div></div>
+                        </div></div>
+        </div></a></div>
         {% endfor %}
-        <br><br><br>
+        </div>
+        <br>
 
         <div>
             <select class="so">
@@ -28,46 +52,45 @@
         <form id="sortForm" method="get" action="{% url 'board:board' %}">
             <input type="hidden" id="so" name="so" value="{{ so }}">
         </form>
-
-        <table>
-            <thead>
-                <tr>
-                    <th>제목</a></th>
-                    <th>작성일</th>
-                    <th>조회수</th>
-                    <th>좋아요</th>
-                    <th>지역</th>
-                    <th>내용</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for post in post_list %}
-                <tr>
-                    <td><a href="{% url 'board:post_detail' post.id%}">{{ post.subject }}</a>
+<br/>
+        <div><!--글리스트-->
+            {% for post in post_list %}
+            <a href="{% url 'board:post_detail' post.id%}"><div class="catePost">
+                <div class="catePost-title">
+                    {{ post.subject }}</div>
+                    
+                <div class="catePost-content">
+                    {{ post.content }}</div>
+                <div class="catePost-detail">
+                    <div style="display:flex; margin-right: 20px;">
+                    <img class="catePost-eyes" src="img/tabler_eye-filledeyeicon.svg" />&nbsp;
+                    <div id="eyes-count">{{ post.hits }}</div></div>
+                    <div style="display:flex">
+                    <img class="catePost-reply" src="img/Vectorcomment.svg" />&nbsp;
+                    <div id="reply-count">
                         {% if post.answer_set.count > 0 %}
-                        <span>({{ post.answer_set.count }})</span>
+                        {{ post.answer_set.count }}
                         {% else %}
-                        <span>(0)</span>
+                        0
                         {% endif %}
-                    </td>
-                    <td>{{ post.create_date|date:"Y-m-d" }}</td>
-                    <td>{{ post.hits }}</td>
-                    <td>{{ post.likes }}</td>
-                    <td>{{ post.area }}</td>
-                    <td>{{ post.content }}</td>
-                </tr>
+                    </div></div>
+                    
+                </div></div></a>
+
                 {% empty %}
-                <tr>
-                    <td colspan="6">등록된 글이 없습니다.</td>
-                </tr>
+                <div>등록된 글이 없습니다</div>
                 {% endfor %}
-            </tbody>
-        </table>
-    </div>
+        </div> 
+    </section>
+</div>
+       </div>
+
     {% with area=area|default:None %}
         {% include "navbar.html" %}
     {% endwith %}
+    
 </body>
+
 </html>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

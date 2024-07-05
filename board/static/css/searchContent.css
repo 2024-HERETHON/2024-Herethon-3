@@ -1,0 +1,32 @@
+.writecomment {
+    display: flex;
+    margin: 19px;
+}
+
+.text {
+    width: 310px;
+    height: 40px;
+    border-radius: 10px;
+    border: 1px solid #ebebeb;
+}
+.submit {
+    background-color: rgb(255, 255, 255, 0);
+    border: 0px solid;
+    color: #727272;
+    width: 40px;
+}
+.searchh {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #ebebeb;
+    margin-top: 100px;
+}
+.searchh img {
+    width: 50px;
+    height: 50px;
+}
+.flexBox {
+    display: flex;
+}

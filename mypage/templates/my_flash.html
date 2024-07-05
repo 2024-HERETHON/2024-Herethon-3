@@ -1,14 +1,36 @@
-<h3>플래시 기록</h3>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-{% if card_list %}
-    {% for card in card_list %}
-        <div>
-            <a href="{% url 'study:flashCardContent' card.flashcard.id %}">
-                {{ card.flashcard.subject }}
-            </a><br>
-        <hr>
+        <title>전체 게시판</title>
+        <link rel="stylesheet" href="{% static 'css/myQuize.css' %}" />
+    </head>
+    <body>
+        <div class="header">
+            <!--헤더-->
+            <div class="timeZone"></div>
+            <div class="flexBox">
+                <a href="{% url 'mypage:my_page' %}"><img src="./img/Vectorback.svg" class="goBack" /></a>
+                <div class="byMe">플래시 카드</div>
+            </div>
         </div>
-    {% endfor %}
-{% else %}
-    <div>내가 저장한 플래시 카드가 없습니다</div>
-{% endif %}
+        <div class="whiteBox">
+            {% if card_list %} {% for card in card_list %}
+
+            <!--흰상자-->
+            <article class="quizeContent">
+                <div class="quizeSize">
+                    <a href="{% url 'study:flashCardContent' card.flashcard.id %}"> {{ card.flashcard.subject }} </a>
+                </div>
+                <img src="#" />
+            </article>
+        </div>
+
+        {% endfor %} {% else %}
+        <div class="errorNone">내가 저장한 플래시 카드가 없습니다</div>
+        {% endif %}
+    </body>
+</html>

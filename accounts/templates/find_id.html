@@ -1,0 +1,100 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>아이디 찾기</title>
+        <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+        <style>
+            .error {
+                color: red;
+            }
+            .success {
+                color: green;
+            }
+            .cert-a {
+                width: 328px;
+                height: 63px;
+                margin-bottom: 10px;
+                font-size: 18px;
+                border-radius: 20px;
+                background-color: var(--blue03);
+                color: var(--white);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-top: 70px;
+            }
+            .cert-a:active {
+                background-color: var(--blue01);
+            }
+        </style>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $("#verify-email").click(function () {
+                    var email = $("#email").val();
+                    $.ajax({
+                        url: "{% url 'accounts:verify_email' %}",
+                        method: "POST",
+                        data: {
+                            email: email,
+                            csrfmiddlewaretoken: "{{ csrf_token }}",
+                        },
+                        success: function (response) {
+                            var messageDiv = $("#email-message");
+                            if (response.exists) {
+                                messageDiv
+                                    .html(
+                                        "이메일 인증이 완료되었습니다. <br> 회원님의 아이디는: " +
+                                            response.userId +
+                                            "<br><div class='cert-a'><a href='{% url 'accounts:login' %}'>로그인 페이지로 이동</a></div>"
+                                    )
+                                    .addClass("success")
+                                    .removeClass("error");
+                            } else {
+                                messageDiv
+                                    .html("해당 이메일이 존재하지 않습니다.")
+                                    .addClass("error")
+                                    .removeClass("success");
+                            }
+                        },
+                        error: function (xhr, status, error) {
+                            $("#email-message")
+                                .html("오류가 발생했습니다. 다시 시도해 주세요.")
+                                .addClass("error")
+                                .removeClass("success");
+                        },
+                    });
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <div id="wrap">
+            <header id="signup-header">
+                <button class="bak-button" type="button" onClick="history.go(-1)"><div class="back"></div></button>
+                <div class="signup-h"><span>아이디 찾기</span></div>
+            </header>
+            <div class="signup-wrapper">
+                <h2 class="findid-text01">이메일 정보로 찾기</h2>
+                <form method="post" action="" id="signup-form">
+                    <div class="signup-email">
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            required
+                            placeholder="이메일 입력"
+                            style="width: 267px; box-sizing: border-box"
+                        />
+                        <button type="button" id="verify-email">인증받기</button>
+                    </div>
+                    <div id="email-message"></div>
+                    <!-- 이메일 인증(중복) 확인 메시지 -->
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

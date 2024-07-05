@@ -1,23 +1,103 @@
-{% if user.is_authenticated %}
-    <label>{{ user.nickname }}</label><br>
-{% else %}
-    <a href="{% url 'accounts:login' %}">로그인 후 이용해 주세요</a>
-{% endif %}
-<div>
-    <label>나의 활동</label><br><br>
-    <a href="{% url 'mypage:my_post' %}">내가 쓴 글</a><br>
-    <a href="{% url 'mypage:my_like' %}">좋아요 누른 글</a><br><br><br>
-</div>
-<div>
-    <label>부동산 스터디</label><br><br>
-    <a href="{% url 'mypage:my_quiz' %}">퀴즈 저장 기록</a><br>
-    <a href="{% url 'mypage:my_flash' %}">플래시 카드 저장 기록</a><br><br><br>
-</div>
-{% if user.is_authenticated %}
-    <div>
-        <label>계정 관리</label><br><br>
-        <a>비밀번호 재설정</a><br>
-        <a a href="{% url 'accounts:logout' %}">로그아웃</a>
-    </div>
-{% endif %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+        <title>전체 게시판</title>
+        <link rel="stylesheet" href="{% static 'css/mypage.css' %}" />
+        <style>
+            .whiteBox {
+                height: 170px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="header">
+            <!--헤더-->
+            <div class="timeZone"></div>
+            <div class="flexBox">
+                <div class="byMe">마이페이지</div>
+            </div>
+        </div>
+        <br />
+        <section class="profileBox">
+            <!--플필 사진-->
+
+            <div class="overLap">
+                <!--겹치기-->
+                <div class="profile"><!--사진--><img src="#" /></div>
+                <div class="edit"><!--편집--><img src="#" /></div>
+            </div>
+        </section>
+        {% if user.is_authenticated %}
+        <br />
+        <div class="nickName">{{ user.nickname }}닉넴</div>
+
+        {% else %}
+        <a href="{% url 'accounts:login' %}"><div class="nickName">로그인을 하시오</div></a>
+        {% endif %}
+
+        <div class="whiteBox">
+            <!--흰상자-->
+            <article>
+                <div class="mine"><!--나의 활동-->나의 활동</div>
+
+                <a href="{% url 'mypage:my_post' %}"
+                    ><div class="myContent"><img src="#" />&nbsp;내가 쓴 글</div></a
+                >
+
+                <a href="{% url 'mypage:my_like' %}"
+                    ><div class="myScrap"><!--좋아요 누른 글--><img src="#" />&nbsp;좋아요 누른 글</div></a
+                >
+            </article>
+        </div>
+
+        <div class="whiteBox">
+            <!--흰상자-->
+            <article>
+                <div class="study"><!--부동산 스터디-->부동산 스터디</div>
+                <a href="{% url 'mypage:my_quiz' %}"
+                    ><div class="myQuize"><!--퀴즈 저장 기록--><img src="#" />&nbsp; 퀴즈 저장 기록</div></a
+                >
+                <a href="{% url 'mypage:my_flash' %}"
+                    ><div class="myCard">
+                        <!--플래시 카드 저장 기록--><img src="./img/image 27letter.svg" /> &nbsp;플래시 카드 저장 기록
+                    </div></a
+                >
+            </article>
+        </div>
+
+        {% if user.is_authenticated %}
+        <div class="whiteBox">
+            <!--흰상자-->
+            <article>
+                <div class="study"><!--부동산 스터디-->계정 관리</div>
+                <a href="#"
+                    ><div class="myQuize"><!--퀴즈 저장 기록--><img src="#" />&nbsp;비밀번호 재설정</div></a
+                >
+                <a href="{% url 'accounts:logout' %}"
+                    ><div class="myCard"><!--플래시 카드 저장 기록--><img src="#" /> &nbsp;로그아웃</div></a
+                >
+            </article>
+        </div>
+
+        {% endif %}
+        <div class="underBar">
+            <!--하단바-->
+
+            <a href="{% url 'study:studyHome' %}"><img src="#" class="quize" /></a>
+            <a href="{% url 'board:board' %}"><img class="home" /></a>
+            <a href="{% url 'mypage:my_page' %}"><img src="#" class="mypage" /></a>
+        </div>
+
+        <nav class="plus">
+            {% if area %}
+            <a href="{% url 'board:post_create' area %}">➕</a>
+            {% else %}
+            <a href="{% url 'board:area_set' %}" class="create">➕</a>
+            {% endif %}
+        </nav>
+    </body>
+</html>

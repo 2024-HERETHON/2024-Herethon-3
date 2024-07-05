@@ -1,0 +1,53 @@
+body {
+    width: 390px;
+    height: 844px;
+    margin: 0px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.header {
+    width: 393px;
+    height: 115px;
+    background-color: white;
+}
+.timeZone {
+    height: 60px;
+}
+
+.writecomment {
+    display: flex;
+
+    margin: 19px;
+}
+.writecomment div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 5px;
+    width: 40px;
+}
+.text {
+    width: 310px;
+    height: 40px;
+    border-radius: 10px;
+    border: 1px solid #ebebeb;
+}
+.submit {
+    background-color: rgb(255, 255, 255, 0);
+    border: 0px solid;
+    color: #727272;
+}
+.searchh {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #ebebeb;
+    margin-top: 100px;
+}
+.searchh img {
+    width: 50px;
+    height: 50px;
+}

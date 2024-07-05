@@ -14,7 +14,7 @@
             <!--하단바-->
 
             <a href="{% url 'study:studyHome' %}"><img src="#" class="quize" /></a>
-            <a href="{% url 'board:board' %}"><img class="home" /></a>
+            <a src="{% url 'board:board' %}"><img class="home" /></a>
             <a href="{% url 'mypage:my_page' %}"><img src="#" class="mypage" /></a>
         </div>
 
@@ -22,10 +22,10 @@
             {% if area %}
             <a href="{% url 'board:post_create' area %}">➕</a>
             {% else %}
-            <a href="{% url 'board:post_create' area %}" class="create">➕</a>
+            <a href="{% url 'board:area_set' %}" class="create">➕</a>
             {% endif %}
         </nav>
     </body>
 </html>
 
-<!--홈버튼 부분 색다른 사진 넣기-->
+<!--마이페이지 부분 색다른 사진 넣기-->

@@ -1,109 +1,194 @@
-<!--상세 페이지 들어왔을 때 조회수 증가-->
-{{ post.update_hits }}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<h1>{{post.subject}}</h1>
-<h5>{{ post.author.nickname }}</h5>
-<div>
-    <!-- {{ post.author.username }} -->
-    {{ post.create_date|date:"m월 d일" }}
-    <label> · 조회</label>
-    {{ post.hits }}
-</div>
-<hr>
-<div>
-    {{ post.content}}
-</div>
-<div>
-    <br><br>
-    <a href="#" data-uri="{% url 'board:vote_post' post.id %}" class="recommend">♥️</a>
-    {{ post.voter.count }}
-    <br><br>
-    {% if messages %}
-    <div>
-        {% for message in messages %}
-            <strong>{{ message.tags }}</strong>
-            <ul><li>{{ message.message }}</li></ul>
-        {% endfor %}
-    </div>
-    {% endif %}
-</div>
-    <form action="{% url 'board:answer_create' post.id %}"
-        method="post" id="AnswerForm">
-        {% csrf_token %}
-        <div>
-            <textarea name="content" id="content" cols="30" rows="15" placeholder="답변을 입력하세요."></textarea>
+        <title>전체 게시판</title>
+        <link rel="stylesheet" href="{% static 'css/post_detail.css' %}" />
+    </head>
+    <body>
+        <!--상세 페이지 들어왔을 때 조회수 증가-->
+
+        <div class="header">
+            <!--헤더-->
+            <div class="timeZone"></div>
+            <a href="main_page.html"><img src="./img/Vectorback.svg" class="goBack" /></a>
         </div>
-        <button type="submit">완료</button>
-    </form>
-<hr>
-
-
-{% if post.answer_set.count > 0 %}
-    <div>
-        {% for answer in post.answer_set.all %}
-            <label>{{ answer.author.nickname }}</label>
-            {% if post.author == answer.author %}
-                <label>(글쓴이)</label>
-            {% endif %}
-            <div>
-                {{ answer.create_date|date:"m/d h:m" }} 
-                <label> 좋아요 {{ answer.voter.count }}개</label>
-                <div>
-                    <span class="toggle-comment" data-answer-id="{{ answer.id }}">💬</span>
-                    <a href="#" data-uri="{% url 'board:vote_answer' answer.id %}" class="recommend">👍</a>
+        <section class="sectionBox">
+            <div class="sectionCate"><!--공지사항(게시판 이름)-->공지사항</div>
+            <div class="sectionTitle"><!--제목-->{{post.subject}}</div>
+            <div class="sectionDetail">
+                <div class="commentProfile">
+                    <!--프사-->
+                    <img src="./img/iconamoon_profile-circle-fill.svg" class="profileImg2" />
                 </div>
-                <h3>{{ answer.content }}</h3>
-            </div>
-            
-            <!--댓글 Start-->
-            <form action="{% url 'board:comment_create' answer.id %}" method="post" class="comment" id="CommentForm-{{ answer.id }}" style="display: none;">
-                {% csrf_token %}
-                <div>
-                    <textarea name="content" id="content" cols="50" placeholder="댓글을 입력하세요."></textarea>
-                </div>
-                <button type="submit">완료</button>
-            </form>
-            {% if answer.comment_set.count > 0 %}
-                <div>
-                    {% for comment in answer.comment_set.all %}
-                        <label>↪️ {{ comment.author.nickname }}</label>
-                        {% if post.author == comment.author %}
-                            <label>(글쓴이)</label>
-                        {% endif %}
-                        <!-- <div>{{ comment.author }}</div> -->
-                        <div>
-                            {{ comment.create_date|date:"m/d h:m" }}
-                            <h3>{{ comment.content }}</h3>
+                <section class="commentSection">
+                    <div class="nickandthumb">
+                        <!--따봉과 닉넴-->
+                        <div class="commentNick">
+                            <div class="nickName">{{ post.author.nickname }}쓰니</div>
                         </div>
-                    {% endfor %}
+                    </div>
+
+                    <div class="commentTime">
+                        <div class="time">{{ post.create_date|date:"m월 d일" }} / 조회 {{ post.hits }}</div>
+                    </div>
+                </section>
+            </div>
+        </section>
+        <div class="communityContent"><!--내용-->{{ post.content}}</div>
+
+        <div class="heart">
+            <a href="#" data-uri="{% url 'board:vote_post' post.id %}" class="recommend">
+                <!--좋아요-->
+                <img src="#" /><br/>
+                <b>하트</b><br/>
+                <b>{{ post.voter.count }}</b></a
+            >
+        </div>
+        <br/>
+<!--오류메시지-->
+            
+            {% if messages %}
+            <div>
+                {% for message in messages %}
+                
+                
+                    <div style="text-align: center; font-size: 8pt; color:red;">{{ message.message }}</div>
+                
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+
+
+        <div>
+            <!--댓글창-->
+            <form action="{% url 'board:answer_create' post.id %}"
+            method="post" id="AnswerForm">
+            {% csrf_token %}
+            <div class="writecomment">
+                <textarea name="content" id="content" cols="30" rows="15" placeholder="답변을 입력하세요." class="text"></textarea>
+                <button type="submit"><img src="#"></button>
+            </div>
+        </form>
+    </div>
+
+
+        {% if post.answer_set.count > 0 %}
+        <div>
+            {% for answer in post.answer_set.all %}
+            <div class="commentDetail">
+            <div class="commentProfile">
+                <!--프사-->
+                <img src="./img/iconamoon_profile-circle-fill.svg" class="profileImg2" />
+            </div>
+            <section class="commentSection">
+                <div class="nickandthumb">
+                    <!--따봉과 닉넴-->
+                    <div class="commentNick">
+                        <div class="nickName">{{ answer.author.nickname }}{% if post.author == answer.author %} 쓰니</div>
+                    </div>
+                    <div class="thumb">
+                        <!--따봉-->
+                        <div class="clean">
+                            <span class="toggle-comment" data-answer-id="{{ answer.id }}"><img src="#" /></span>&nbsp; <span>|</span>&nbsp;
+                        <a href="#" data-uri="{% url 'board:vote_answer' answer.id %}" class="recommend"> <img src="#" /></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="commentTime">
+                    <div class="time"> {{ answer.create_date|date:"m/d h:m" }} / 좋아요 {{ answer.voter.count }}개</div>
                 </div>
             {% endif %}
-            <hr>
+            <div style="font-size: 11pt">
+                <!--댓글-->
+                {{ answer.content }}
+            </div>
+        </section></div>
+        
+<div style="height:7px"></div>
+            <!--대댓글 Start-->
+            <form
+                action="{% url 'board:comment_create' answer.id %}"
+                method="post"
+                class="comment"
+                id="CommentForm-{{ answer.id }}"
+                style="display: none"
+            >
+                {% csrf_token %}
+                <div class="writecomment" >
+                    <textarea class="text" name="content" id="content" cols="50" placeholder="대댓글을 입력하세요."></textarea>
+                
+                <button type="submit"><img src="#"></button></div>
+            </form>
+
+        
+            {% if answer.comment_set.count > 0 %}
+            <div>
+                {% for comment in answer.comment_set.all %}
+
+                <div class="commentDetail" style="margin-left:50px">
+                    <div class="commentProfile">
+                        <!--프사-->
+                        <img src="./img/iconamoon_profile-circle-fill.svg" class="profileImg2" />
+                    </div>
+                    <section class="commentSection">
+                        
+                            <div class="commentNick" style="font-size: 10pt">
+                                <div class="nickName" > {{ comment.author.nickname }}</div>
+                                {% if post.author == comment.author %}
+                            
+                {% endif %}
+                {{ comment.author }}</div>
+                <div class="commentTime">
+                    <div class="time">{{ comment.create_date|date:"m/d h:m" }}</div>
+                </div>
+                <div style="font-size: 11pt">
+                    <!--댓글-->
+                    {{ comment.content }}
+                </div>
+            
+            
+        </section>
+        </div> 
+                </div>
+                <div style="height:3px"></div>
+                {% endfor %}
+            </div>
+            {% endif %}
+            <div style="height:3px"></div>
+            <hr />
             <!--댓글 End-->
-        {% endfor %}
-    </div>
-{% endif %}
+            {% endfor %}
+        </div>
+        {% endif %}
+    </body>
 
-<script type="text/javascript">
-    document.addEventListener("DOMContentLoaded", function() {
-        // Handle the click event for elements with the class 'toggle-comment'
-        document.querySelectorAll(".toggle-comment").forEach(function(element) {
-            element.addEventListener('click', function() {
-                var answerId = this.getAttribute('data-answer-id');
-                var commentForm = document.getElementById('CommentForm-' + answerId);
-                if (commentForm.style.display === "none") {
-                    commentForm.style.display = "block";
-                } else {
-                    commentForm.style.display = "none";
-                }
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function () {
+            // Handle the click event for elements with the class 'toggle-comment'
+            document.querySelectorAll(".toggle-comment").forEach(function (element) {
+                element.addEventListener("click", function () {
+                    var answerId = this.getAttribute("data-answer-id");
+                    var commentForm = document.getElementById("CommentForm-" + answerId);
+                    if (commentForm.style.display === "none") {
+                        commentForm.style.display = "block";
+                    } else {
+                        commentForm.style.display = "none";
+                    }
+                });
+            });
+
+            document.querySelectorAll(".recommend").forEach(function (element) {
+                element.addEventListener("click", function () {
+                    var uri = this.getAttribute("data-uri");
+                    window.location.href = uri;
+                });
             });
         });
-
-        document.querySelectorAll(".recommend").forEach(function(element) {
-            element.addEventListener('click', function() {
-                var uri = this.getAttribute('data-uri');
-                window.location.href = uri;
-            });
-        });
-    });
-</script>
+    </script>
+</html>
